@@ -22,7 +22,7 @@ public class mediaManager {
 
     public static void main (String[] args) {
         album first = getMediaList();
-        
+
         //TODO: fix toString to return start of list.
         //Currently leaves the array at the end so can not run the find.
         //System.out.println(first.toString());
