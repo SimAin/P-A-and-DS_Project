@@ -1,7 +1,7 @@
 public class mediaManager {
 
     public static album getMediaList() {
-        album metSt = new album (null, "Metallica", "St Anger");
+        album metSt = new album (null, "Metallica", "St Anger");   //BACK
         album metSo = new album (metSt, "Metallica", "Some Kind Of Monster");
         album metD = new album (metSo, "Metallica", "Death Magnetic");
         album metH = new album (metD, "Metallica", "Hardwired");
@@ -17,15 +17,33 @@ public class mediaManager {
         album ftPs = new album (ftEn, "Frank Turner", "Positive Songs for Negative People");
         album gdAm = new album (ftPs, "Green Day", "American Idiot");
 
+        metSt.setPrevious(metSo);
+        metSo.setPrevious(metD);
+        metD.setPrevious(metH);
+        metH.setPrevious(acFor);
+        acFor.setPrevious(acH);
+        acH.setPrevious(actR);
+        actR.setPrevious(imNum);
+        imNum.setPrevious(imSo);
+        imSo.setPrevious(gl59);
+        gl59.setPrevious(glAM);
+        glAM.setPrevious(amWc);
+        amWc.setPrevious(ftEn);
+        ftEn.setPrevious(ftPs);
+        ftPs.setPrevious(gdAm);
+        gdAm.setPrevious(null);
+
         return gdAm;
     }
 
     public static void main (String[] args) {
-        album first = getMediaList();
 
-        //TODO: fix toString to return start of list.
-        //Currently leaves the array at the end so can not run the find.
-        //System.out.println(first.toString());
-        System.out.println("Search for album '59th Sound', returned artist: " + first.findArtistFromAlbum("59th Sound"));
+        album album = getMediaList();
+        albums head = new albums();
+        head.setHead(album);
+
+        System.out.println(head.toString());
+        System.out.println(head.toString());
+        System.out.println("Search for album '59th Sound', returned artist: " + album.findArtistFromAlbum("59th Sound"));
     }
 }

@@ -1,6 +1,6 @@
 public class album {
     private album next;
-    //private album previous;
+    private album previous;
 
     private String artistName;
     private  String albumName;
@@ -23,12 +23,12 @@ public class album {
         this.next = next;
     }
 
-    /*public album getPrevious() {
+    public album getPrevious() {
         return previous;
     }
     public void setPrevious(album previous) {
         this.previous = previous;
-    }*/
+    }
 
     public String getArtistName() {
         return artistName;
@@ -44,27 +44,26 @@ public class album {
         this.albumName = albumName;
     }
 
-    public String toString() throws ArrayIndexOutOfBoundsException {
+    /*public String toString() throws ArrayIndexOutOfBoundsException {
+        //Create returnable string of albums
         String result = "[" + "{" + this.getArtistName() + ", " + this.getAlbumName() + "}, ";
         while (this.next != null) {
             result = result + "{" + this.next.getArtistName() + ", " + this.next.getAlbumName() + "}, ";
-            this.next = this.next.getNext ();   // <3>
+            this.next = this.next.getNext ();
         }
         result = result + "]";
+        result += "]";
+
         return result;
-    }
+    }*/
 
     public String findArtistFromAlbum (String searchkey) {
-        System.out.println("0 " + albumName );
         if (this.getAlbumName().equals(searchkey)) {
-            System.out.println("1");
             return this.artistName;
         }
-        System.out.println(next.getAlbumName());
         if (next == null) {
             return null;
         } else {
-            System.out.println("2");
             return next.findArtistFromAlbum(searchkey);
         }
     }
