@@ -1,7 +1,6 @@
 public class album {
-
     private album next;
-    //private album previous;
+    private album previous;
 
     private String artistName;
     private  String albumName;
@@ -15,7 +14,7 @@ public class album {
         this.albumName = albumName;
     }
 
-    public album () {}
+    //public album () {}
 
     public album getNext() {
         return next;
@@ -24,12 +23,12 @@ public class album {
         this.next = next;
     }
 
-    /*public album getPrevious() {
+    public album getPrevious() {
         return previous;
     }
     public void setPrevious(album previous) {
         this.previous = previous;
-    }*/
+    }
 
     public String getArtistName() {
         return artistName;
@@ -45,26 +44,28 @@ public class album {
         this.albumName = albumName;
     }
 
-    public String toString() throws ArrayIndexOutOfBoundsException {
+    /*public String toString() throws ArrayIndexOutOfBoundsException {
+        //Create returnable string of albums
         String result = "[" + "{" + this.getArtistName() + ", " + this.getAlbumName() + "}, ";
         while (this.next != null) {
             result = result + "{" + this.next.getArtistName() + ", " + this.next.getAlbumName() + "}, ";
-            this.next = this.next.getNext ();   // <3>
+            this.next = this.next.getNext ();
         }
         result = result + "]";
-        return result;
-    }
+        result += "]";
 
-    public album find (String searchkey) {
+        return result;
+    }*/
+
+    public String findArtistFromAlbum (String searchkey) {
         if (this.getAlbumName().equals(searchkey)) {
-            return this;
-        } else if (this.getAlbumName().compareTo (searchkey) > 0) {
-            if (next == null) {
-                return null;
-            } else {
-                return next.find(searchkey);
-            }
+            return this.artistName;
         }
-        return new album();
+        if (next == null) {
+            return null;
+        } else {
+            return next.findArtistFromAlbum(searchkey);
+        }
     }
 }
+

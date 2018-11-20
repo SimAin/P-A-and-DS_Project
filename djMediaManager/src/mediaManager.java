@@ -1,9 +1,7 @@
 public class mediaManager {
 
-    private static final String m_file = "C:/Users/srain/IdeaProjects/practicalCoursework_Problem_1/src/media_library.txt";
-
     public static album getMediaList() {
-        album metSt = new album (null, "Metallica", "St Anger");
+        album metSt = new album (null, "Metallica", "St Anger");   //BACK
         album metSo = new album (metSt, "Metallica", "Some Kind Of Monster");
         album metD = new album (metSo, "Metallica", "Death Magnetic");
         album metH = new album (metD, "Metallica", "Hardwired");
@@ -19,28 +17,33 @@ public class mediaManager {
         album ftPs = new album (ftEn, "Frank Turner", "Positive Songs for Negative People");
         album gdAm = new album (ftPs, "Green Day", "American Idiot");
 
-        /*Metallica,St Anger,Metal,11,
-        Metallica,Some Kind Of Monster,Metal,11,
-        Metallica,Death Magnetic,Metal,10,
-        Metallica,Hardwired...To Self-Destruct,Metal,12,
-        AC/DC,Highway to Hell,Heavy Metal,9,
-        ACC/DC,For Those About to Rock (We Salute You),Metal,12,
-        AC/DC,The Razors Edge,Metal,10,
-        Iron Maiden,The Number Of The Beast, Heavy Rock,14,
-        Iron Maiden,Somewhere In Time, Heavy Rock,15,
-        The Gaslight Anthum, 59th Sound, Rock,10,
-        The Gaslight Anthum, American Slang, Rock,11,
-        Against Me,White Crosses / Black Crosses, Rock,10,
-        Frank Turner,England keep my bones, Folk Rock, 11,
-        Frank Turner,Positive Songs for Negative People, Folk Rock,12,
-        Green Day,Anmerican Idoit, Punk Rock,9,*/
+        metSt.setPrevious(metSo);
+        metSo.setPrevious(metD);
+        metD.setPrevious(metH);
+        metH.setPrevious(acFor);
+        acFor.setPrevious(acH);
+        acH.setPrevious(actR);
+        actR.setPrevious(imNum);
+        imNum.setPrevious(imSo);
+        imSo.setPrevious(gl59);
+        gl59.setPrevious(glAM);
+        glAM.setPrevious(amWc);
+        amWc.setPrevious(ftEn);
+        ftEn.setPrevious(ftPs);
+        ftPs.setPrevious(gdAm);
+        gdAm.setPrevious(null);
 
         return gdAm;
     }
 
     public static void main (String[] args) {
-        album first = getMediaList();
-        System.out.println(first.toString());
-        System.out.println(first.find("59th Sound"));
+
+        album album = getMediaList();
+        albums head = new albums();
+        head.setHead(album);
+
+        System.out.println(head.toString());
+        System.out.println(head.toString());
+        System.out.println("Search for album '59th Sound', returned artist: " + album.findArtistFromAlbum("59th Sound"));
     }
 }
