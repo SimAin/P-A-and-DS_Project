@@ -13,6 +13,8 @@ public class album {
         this.albumName = albumName;
     }
 
+    public album() {}
+
     public album getNext() {
         return next;
     }
@@ -50,6 +52,56 @@ public class album {
         } else {
             return next.findArtistFromAlbum(searchkey);
         }
+    }
+
+    public album insert (album data, int index) {
+
+        album current = this;
+        
+
+
+        int currentIndex = 0;
+        if (index < 0) { // check index is positive
+            throw new ArrayIndexOutOfBoundsException (index);
+        }
+
+        if (index == 0) {
+            return new album (current, data.artistName, data.albumName);
+        }
+        System.out.println("1");
+        while (current != null) {
+            System.out.println(current.albumName);
+            if (currentIndex+1 == index) {
+                System.out.println("3");
+                album insertedNode = new album (current.getNext(),data.artistName, data.albumName);
+                current.next = insertedNode;
+                return this;
+            }
+            currentIndex += 1;
+            current = current.getNext ();
+        }
+        throw new ArrayIndexOutOfBoundsException (index);
+    }
+
+    // Delete node in list
+    public album delete (int index) {
+        album current = this;
+        int currentIndex = 0;
+
+        if (index == 0) {
+            return next;
+        }
+
+        while (current != null) {
+            if (currentIndex+1 == index) {
+                current.setNext ( current.getNext().getNext());
+
+                return this; // remember, the delete method was called on the first item
+            }
+            currentIndex += 1;
+            current = current.getNext ();
+        }
+        throw new ArrayIndexOutOfBoundsException (index);
     }
 }
 
