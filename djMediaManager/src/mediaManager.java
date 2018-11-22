@@ -15,7 +15,7 @@ public class mediaManager {
         album amWc = new album (glAM, "Against Me", "White Crosses / Black Crosses");
         album ftEn = new album (amWc, "Frank Turner", "England keep my bones");
         album ftPs = new album (ftEn, "Frank Turner", "Positive Songs for Negative People");
-        album gdAm = new album (ftPs, "Green Day", "American Idiot");
+        album gdAm = new album (ftPs, "Green Day", "American Idiot"); //FRONT
 
         metSt.setPrevious(metSo);
         metSo.setPrevious(metD);
@@ -40,10 +40,15 @@ public class mediaManager {
 
         album album = getMediaList();
         albums head = new albums();
+        albums sort = new albums();
         head.setHead(album);
 
         System.out.println(head.toString());
-        System.out.println(head.toString());
+        System.out.println(head.getSize());
         System.out.println("Search for album '59th Sound', returned artist: " + album.findArtistFromAlbum("59th Sound"));
+        //System.out.println("Search for album '59th Sound', returned artist: " + head.contains("59th Sound"));
+        System.out.println(head.getSize());
+
+        //albums.insertionSort(sort);
     }
 }

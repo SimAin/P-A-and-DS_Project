@@ -4,7 +4,6 @@ public class album {
 
     private String artistName;
     private  String albumName;
-
     //public String genera;
     //public int numberOfTracks;
 
@@ -13,8 +12,6 @@ public class album {
         this.artistName = artistName;
         this.albumName = albumName;
     }
-
-    //public album () {}
 
     public album getNext() {
         return next;
@@ -43,19 +40,6 @@ public class album {
     public void setAlbumName(String albumName) {
         this.albumName = albumName;
     }
-
-    /*public String toString() throws ArrayIndexOutOfBoundsException {
-        //Create returnable string of albums
-        String result = "[" + "{" + this.getArtistName() + ", " + this.getAlbumName() + "}, ";
-        while (this.next != null) {
-            result = result + "{" + this.next.getArtistName() + ", " + this.next.getAlbumName() + "}, ";
-            this.next = this.next.getNext ();
-        }
-        result = result + "]";
-        result += "]";
-
-        return result;
-    }*/
 
     public String findArtistFromAlbum (String searchkey) {
         if (this.getAlbumName().equals(searchkey)) {
