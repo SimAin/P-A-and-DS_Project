@@ -54,33 +54,15 @@ public class album {
         }
     }
 
-    public album insert (album data, int index) {
-
+    // Take data, create node and place it in last item
+    public void join (album data) {
         album current = this;
-        
 
-
-        int currentIndex = 0;
-        if (index < 0) { // check index is positive
-            throw new ArrayIndexOutOfBoundsException (index);
-        }
-
-        if (index == 0) {
-            return new album (current, data.artistName, data.albumName);
-        }
-        System.out.println("1");
-        while (current != null) {
-            System.out.println(current.albumName);
-            if (currentIndex+1 == index) {
-                System.out.println("3");
-                album insertedNode = new album (current.getNext(),data.artistName, data.albumName);
-                current.next = insertedNode;
-                return this;
-            }
-            currentIndex += 1;
+        while (current.getNext () != null) {
             current = current.getNext ();
         }
-        throw new ArrayIndexOutOfBoundsException (index);
+
+        current.setNext (new album (null, data.artistName, data.albumName));
     }
 
     // Delete node in list
@@ -94,7 +76,10 @@ public class album {
 
         while (current != null) {
             if (currentIndex+1 == index) {
-                current.setNext ( current.getNext().getNext());
+                if(current.getNext() != null) {
+                    current.setNext ( current.getNext().getNext());
+                }
+
 
                 return this; // remember, the delete method was called on the first item
             }

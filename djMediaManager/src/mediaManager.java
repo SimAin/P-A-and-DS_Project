@@ -54,8 +54,11 @@ public class mediaManager {
         System.out.println(head.getSize());
 
         head.bubbleSort();
-        System.out.println(head.toString());
+
         System.out.println("YOYOYO");
+        System.out.println(head.toString());
         System.out.println(head.getSize());
+
+        System.out.println();
     }
 }

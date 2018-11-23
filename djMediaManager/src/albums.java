@@ -28,11 +28,11 @@ public class albums {
 
     public int getSize() {
         int size = 0;
-        if(head != null){
+        if (head != null) {
             size++;
             album current = head;
             while (current.getNext() != null) {
-                size++ ;
+                size++;
                 current = current.getNext();
             }
         }
@@ -41,44 +41,70 @@ public class albums {
     }
 
 
-
     //TODO: convert string sort to albums in list
 
-    public void bubbleSort () {
+    public void bubbleSort() {
         boolean madeSwap;
         album tempArray = head;
         int siz = this.getSize();
-        System.out.println(siz);
-        if (siz != 0)
-        {
-            System.out.println("2");
+        if (siz != 0) {
             do {
-                System.out.println("3");
-                System.out.println(tempArray.getAlbumName());
                 madeSwap = false;
                 int count = 0;
-                for (int i = 0; i < siz -1; i = i + 1) {
-                    System.out.println(tempArray.getAlbumName().compareTo(tempArray.getNext().getAlbumName()));
-                    if (tempArray.getAlbumName().compareTo(tempArray.getNext().getAlbumName()) > 0) {
-                        System.out.println("5");
-                        album temp = tempArray;
-                        album temp2 = tempArray.getNext();
-                        tempArray.delete(0);
-                        tempArray.delete(1);
-                        tempArray.insert(temp2, count);
-                        tempArray.insert(temp, count+1);
+                for (int i = 0; i < siz - 1; i = i + 1) {
+                    if (tempArray != null) {
+                        if (tempArray.getNext() != null) {
+                            if (tempArray.getAlbumName().compareTo(tempArray.getNext().getAlbumName()) > 0) {
+                                System.out.println("5 " + tempArray.getAlbumName());
+                                album temp = tempArray;
+                                album prev = tempArray.getPrevious();
+                                album next = tempArray.getNext();
+                                album nextandOne;
+                                if (tempArray.getNext().getNext() == null) {
+                                    nextandOne = null;
+                                } else {
+                                    nextandOne = tempArray.getNext().getNext();
+                                }
 
+                                next.setPrevious(prev);
+                                next.setNext(temp);
+                                prev.getNext().setNext(nextandOne);
+                                prev.getNext().setPrevious(next);
+                                prev.setNext(next);
 
-                        System.out.println(tempArray.toString());
-                        madeSwap = true;
+                                madeSwap = true;
+                            }
+                        }
+
                     }
+
                     count++;
-                    tempArray = tempArray.getNext();
+                    if (tempArray.getNext() == null) {
+                        tempArray = head;
+                    } else {
+                        tempArray = tempArray.getNext();
+                    }
+
                 }
             } while (madeSwap);
         }
-        System.out.println("FINAL + " + tempArray.toString());
+        boolean foundStart = false;
+
+        while (!foundStart) {
+            if (tempArray != null) {
+                this.head = tempArray;
+                System.out.println(this.head.getAlbumName());
+            }
+            if (tempArray.getPrevious() == null) {
+                foundStart = true;
+            } else {
+                tempArray = tempArray.getPrevious();
+            }
+        }
+
         this.head = tempArray;
+    }
+
         //Test sort length was the same as at the start
         /*boolean lengthsError = checkEqualIntArraysLength(tempArray, numbers);
         if(lengthsError) {
@@ -86,7 +112,7 @@ public class albums {
         }*/
 
         //return numbers;
-    }
+
 
     /*public boolean contains (String searchkey) {
         albums current = this;
