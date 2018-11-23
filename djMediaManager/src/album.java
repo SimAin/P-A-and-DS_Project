@@ -4,7 +4,6 @@ public class album {
 
     private String artistName;
     private  String albumName;
-
     //public String genera;
     //public int numberOfTracks;
 
@@ -14,7 +13,7 @@ public class album {
         this.albumName = albumName;
     }
 
-    //public album () {}
+    public album() {}
 
     public album getNext() {
         return next;
@@ -44,19 +43,6 @@ public class album {
         this.albumName = albumName;
     }
 
-    /*public String toString() throws ArrayIndexOutOfBoundsException {
-        //Create returnable string of albums
-        String result = "[" + "{" + this.getArtistName() + ", " + this.getAlbumName() + "}, ";
-        while (this.next != null) {
-            result = result + "{" + this.next.getArtistName() + ", " + this.next.getAlbumName() + "}, ";
-            this.next = this.next.getNext ();
-        }
-        result = result + "]";
-        result += "]";
-
-        return result;
-    }*/
-
     public String findArtistFromAlbum (String searchkey) {
         if (this.getAlbumName().equals(searchkey)) {
             return this.artistName;
@@ -66,6 +52,41 @@ public class album {
         } else {
             return next.findArtistFromAlbum(searchkey);
         }
+    }
+
+    // Take data, create node and place it in last item
+    public void join (album data) {
+        album current = this;
+
+        while (current.getNext () != null) {
+            current = current.getNext ();
+        }
+
+        current.setNext (new album (null, data.artistName, data.albumName));
+    }
+
+    // Delete node in list
+    public album delete (int index) {
+        album current = this;
+        int currentIndex = 0;
+
+        if (index == 0) {
+            return next;
+        }
+
+        while (current != null) {
+            if (currentIndex+1 == index) {
+                if(current.getNext() != null) {
+                    current.setNext ( current.getNext().getNext());
+                }
+
+
+                return this; // remember, the delete method was called on the first item
+            }
+            currentIndex += 1;
+            current = current.getNext ();
+        }
+        throw new ArrayIndexOutOfBoundsException (index);
     }
 }
 
