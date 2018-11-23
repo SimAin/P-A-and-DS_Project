@@ -41,8 +41,6 @@ public class albums {
     }
 
 
-    //TODO: convert string sort to albums in list
-
     public void bubbleSort() {
         boolean madeSwap;
         album tempArray = head;
@@ -50,7 +48,6 @@ public class albums {
         if (siz != 0) {
             do {
                 madeSwap = false;
-                int count = 0;
                 for (int i = 0; i < siz - 1; i = i + 1) {
                     if (tempArray != null) {
                         if (tempArray.getNext() != null) {
@@ -78,7 +75,6 @@ public class albums {
 
                     }
 
-                    count++;
                     if (tempArray.getNext() == null) {
                         tempArray = head;
                     } else {

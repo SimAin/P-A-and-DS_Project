@@ -37,9 +37,6 @@ public class mediaManager {
         return gdAm;
     }
 
-
-
-
     public static void main (String[] args) {
 
         album album = getMediaList();
