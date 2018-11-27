@@ -15,6 +15,11 @@ public class album {
 
     public album() {}
 
+    public void set(album newA) {
+        this.setAlbumName(newA.albumName);
+        this.setArtistName(newA.artistName);
+    }
+
     public album getNext() {
         return next;
     }

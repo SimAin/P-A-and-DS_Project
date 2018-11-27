@@ -48,14 +48,15 @@ public class albums {
         if (siz != 0) {
             do {
                 madeSwap = false;
-                for (int i = 0; i < siz - 1; i = i + 1) {
+                for (int i = 0; i < siz ; i = i + 1) {
                     if (tempArray != null) {
                         if (tempArray.getNext() != null) {
                             if (tempArray.getAlbumName().compareTo(tempArray.getNext().getAlbumName()) > 0) {
-                                System.out.println("5 " + tempArray.getAlbumName());
+
                                 album temp = tempArray;
                                 album prev = tempArray.getPrevious();
                                 album next = tempArray.getNext();
+
                                 album nextandOne;
                                 if (tempArray.getNext().getNext() == null) {
                                     nextandOne = null;
@@ -63,11 +64,37 @@ public class albums {
                                     nextandOne = tempArray.getNext().getNext();
                                 }
 
-                                next.setPrevious(prev);
-                                next.setNext(temp);
-                                prev.getNext().setNext(nextandOne);
-                                prev.getNext().setPrevious(next);
-                                prev.setNext(next);
+                                if(prev == null) {
+                                    //changer 1
+                                    next.setPrevious(null);
+                                    next.setNext(temp);
+                                    //changer 2
+                                    temp.setNext(nextandOne);
+                                    temp.setPrevious(next);
+                                    //next's next's prev
+                                    nextandOne.setPrevious(temp);
+
+                                } else if(nextandOne == null) {
+                                    //changer 1
+                                    next.setPrevious(prev);
+                                    next.setNext(temp);
+                                    //changer 2
+                                    temp.setNext(null);
+                                    temp.setPrevious(next);
+                                    //prev's next
+                                    prev.setNext(next);
+                                } else {
+                                    //changer 1
+                                    next.setPrevious(prev);
+                                    next.setNext(temp);
+                                    //changer 2
+                                    temp.setNext(nextandOne);
+                                    temp.setPrevious(next);
+                                    //prev's next
+                                    prev.setNext(next);
+                                    // next next's prev
+                                    nextandOne.setPrevious(temp); ////here
+                                }
 
                                 madeSwap = true;
                             }
@@ -80,7 +107,14 @@ public class albums {
                     } else {
                         tempArray = tempArray.getNext();
                     }
-
+                }
+                boolean foundStart = false;
+                while (!foundStart) {
+                    if (tempArray.getPrevious() == null) {
+                        foundStart = true;
+                    } else {
+                        tempArray = tempArray.getPrevious();
+                    }
                 }
             } while (madeSwap);
         }
@@ -89,7 +123,6 @@ public class albums {
         while (!foundStart) {
             if (tempArray != null) {
                 this.head = tempArray;
-                System.out.println(this.head.getAlbumName());
             }
             if (tempArray.getPrevious() == null) {
                 foundStart = true;
