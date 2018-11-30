@@ -52,6 +52,7 @@ public class albums {
     }
 
     public void bubbleSort() {
+        int initialCount = getSize();
         boolean madeSwap;
         album tempArray = head;
         int siz = this.getSize();
@@ -84,18 +85,29 @@ public class albums {
                     }
                 }
                 //Following loop, reset head of list to start.
-                boolean foundStart = false;
-                while (!foundStart) {
-                    if (tempArray.getPrevious() == null) {
-                        foundStart = true;
-                    } else {
-                        tempArray = tempArray.getPrevious();
-                    }
-                }
+                tempArray = resetHead(tempArray);
+
             } while (madeSwap);
         }
+
+        if(initialCount != getSize()) {
+            System.out.println("Error: Sizes do not match after bubble sort.");
+        }
+
         //Reset head to temp
         this.head = tempArray;
+    }
+
+    public album resetHead(album tempArray) {
+        boolean foundStart = false;
+        while (!foundStart) {
+            if (tempArray.getPrevious() == null) {
+                foundStart = true;
+            } else {
+                tempArray = tempArray.getPrevious();
+            }
+        }
+        return tempArray;
     }
 
     private album swap(album tempArray) {
@@ -126,41 +138,25 @@ public class albums {
         return tempArray;
     }
 
-        //Test sort length was the same as at the start
-        /*boolean lengthsError = checkEqualIntArraysLength(tempArray, numbers);
-        if(lengthsError) {
-            addLengthError(tempArray, numbers);
-        }*/
 
-        //return numbers;
-
-
-    /*public boolean contains (String searchkey) {
+    public boolean contains (String searchkey) {
         albums current = this;
-        System.out.println(current.head.getAlbumName());
         if (current.head.getAlbumName().equals (searchkey)) {
-            System.out.println("2");
+            current.head = resetHead(current.head);
             return true;
-        } else if (current.head.getAlbumName().compareTo (searchkey) > 0) {
-            System.out.println("3");
+        }
+        if (current.head.getAlbumName().compareTo (searchkey) < 0) {
             if (current.head.getNext() == null) {
-                System.out.println("4");
                 return false;
             } else {
-                System.out.println("5");
-                if(current.head.getNext().getAlbumName().equals (searchkey)) {
-                    System.out.println(current.head.getNext().getAlbumName().equals (searchkey));
+                current.head = current.head.getNext();
+                if(current.contains(searchkey)) {
                     return true;
-                } else {
-                    System.out.println("7");
-                    current.head = current.head.getNext();
-                    current.contains(searchkey);
                 }
-                //root.getLeftChild().contains (searchkey);
             }
         }
-        System.out.println("8");
+        current.head = resetHead(current.head);
         return false;
-    }*/
+    }
 
 }

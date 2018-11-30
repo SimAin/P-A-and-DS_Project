@@ -57,5 +57,20 @@ public class mediaManager {
         System.out.println("Sorted array:  ");
         System.out.println(head.toString(true));
         System.out.println("Size: " + head.getSize());
+
+        if(head.contains("The Razors Edge")){
+            System.out.println("The Razors Edge was found in list");
+        } else {
+            System.out.println("The Razors Edge was NOT found in list");
+        }
+
+        if(head.contains("The Razor ")){
+            System.out.println("The Razor was found in list");
+        } else {
+            System.out.println("The Razor was NOT found in list");
+        }
+
+        System.out.println(head.toString(true));
+        System.out.println("Size: " + head.getSize());
     }
 }
