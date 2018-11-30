@@ -48,7 +48,32 @@ public class albums {
             }
         }
         return size;
+    }
 
+    public int getArtistCount() {
+        int size = 0;
+        int counter = 0;
+        String[] tempList = new String[50];
+        if (head != null) {
+            size++;
+            album current = head;
+            while (current.getNext() != null) {
+                boolean found = false;
+                for (String n:tempList
+                     ) {
+                    if(n == current.getArtistName()){
+                        found = true;
+                    }
+                }
+                if (!found) {
+                    tempList[counter] = current.getArtistName();
+                    size++;
+                    counter++;
+                }
+                current = current.getNext();
+            }
+        }
+        return size;
     }
 
     public void bubbleSort() {
@@ -138,7 +163,6 @@ public class albums {
         return tempArray;
     }
 
-
     public boolean contains (String searchkey) {
         albums current = this;
         if (current.head.getAlbumName().equals (searchkey)) {
@@ -158,5 +182,4 @@ public class albums {
         current.head = resetHead(current.head);
         return false;
     }
-
 }

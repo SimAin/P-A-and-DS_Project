@@ -72,5 +72,7 @@ public class mediaManager {
 
         System.out.println(head.toString(true));
         System.out.println("Size: " + head.getSize());
+
+        System.out.println("Artist Count =    " + head.getArtistCount());
     }
 }
