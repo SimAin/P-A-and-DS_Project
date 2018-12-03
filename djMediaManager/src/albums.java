@@ -17,17 +17,6 @@ public class albums {
     @Override
     public String toString() {
         album current = head;
-        String result = "{" + current.getArtistName() + ", " + current.getAlbumName() + "}, ";
-
-        while (current.getNext() != null) {
-            result = result + "{" + current.getNext().getArtistName() + ", " + current.getNext().getAlbumName() + "}, ";
-            current = current.getNext();
-        }
-        return result;
-    }
-
-    public String toString(boolean vert) {
-        album current = head;
         String result = "\n{" + current.getArtistName() + ", " + current.getAlbumName() + "}, ";
 
         while (current.getNext() != null) {
@@ -48,10 +37,82 @@ public class albums {
             }
         }
         return size;
-
     }
 
-    public void bubbleSort() {
+    public int getArtistCount() {
+        int size = 0;
+        int counter = 0;
+        String[] tempList = new String[50];
+        if (head != null) {
+            size++;
+            album current = head;
+            while (current.getNext() != null) {
+                boolean found = false;
+                for (String n:tempList
+                     ) {
+                    if(n == current.getArtistName()){
+                        found = true;
+                    }
+                }
+                if (!found) {
+                    tempList[counter] = current.getArtistName();
+                    size++;
+                    counter++;
+                }
+                current = current.getNext();
+            }
+        }
+        return size;
+    }
+
+    public void artistBubbleSort() {
+        int initialCount = getSize();
+        boolean madeSwap;
+        album tempArray = head;
+        int siz = this.getSize();
+        //If collection > 0
+        if (siz != 0) {
+            //Loop through list of albums until no swap is made
+            do {
+                //Set trigger to false for swap
+                madeSwap = false;
+                //Loop through each album to check for a swap
+                for (int i = 0; i < siz ; i = i + 1) {
+                    //If next album exists
+                    if (tempArray != null) {
+                        //If there is an item to swap it with
+                        if (tempArray.getNext() != null) {
+                            //Compare items to see if they are the right way round.
+                            //If not enter statement
+                            if (tempArray.getArtistName().compareTo(tempArray.getNext().getArtistName()) > 0) {
+                                //Swap items
+                                swap(tempArray);
+                                madeSwap = true;
+                            } else if ((tempArray.getArtistName().compareTo(tempArray.getNext().getArtistName()) == 0) && (tempArray.getAlbumName().compareTo(tempArray.getNext().getAlbumName()) > 0)) {
+                                //Swap items
+                                swap(tempArray);
+                                madeSwap = true;
+                            }
+                        }
+                    }
+                    //Set the current head to the next item, unless this is last item
+                    if (tempArray.getNext() != null) {
+                        tempArray = tempArray.getNext();
+                    } else {
+                        tempArray = head;
+                    }
+                }
+                //Following loop, reset head of list to start.
+                tempArray = resetHead(tempArray);
+
+            } while (madeSwap);
+        }
+        //Reset head to temp
+        this.head = tempArray;
+    }
+
+    public void albumBubbleSort() {
+        int initialCount = getSize();
         boolean madeSwap;
         album tempArray = head;
         int siz = this.getSize();
@@ -84,18 +145,25 @@ public class albums {
                     }
                 }
                 //Following loop, reset head of list to start.
-                boolean foundStart = false;
-                while (!foundStart) {
-                    if (tempArray.getPrevious() == null) {
-                        foundStart = true;
-                    } else {
-                        tempArray = tempArray.getPrevious();
-                    }
-                }
+                tempArray = resetHead(tempArray);
+
             } while (madeSwap);
         }
+
         //Reset head to temp
         this.head = tempArray;
+    }
+
+    public album resetHead(album tempArray) {
+        boolean foundStart = false;
+        while (!foundStart) {
+            if (tempArray.getPrevious() == null) {
+                foundStart = true;
+            } else {
+                tempArray = tempArray.getPrevious();
+            }
+        }
+        return tempArray;
     }
 
     private album swap(album tempArray) {
@@ -126,41 +194,23 @@ public class albums {
         return tempArray;
     }
 
-        //Test sort length was the same as at the start
-        /*boolean lengthsError = checkEqualIntArraysLength(tempArray, numbers);
-        if(lengthsError) {
-            addLengthError(tempArray, numbers);
-        }*/
-
-        //return numbers;
-
-
-    /*public boolean contains (String searchkey) {
+    public boolean contains (String searchkey) {
         albums current = this;
-        System.out.println(current.head.getAlbumName());
         if (current.head.getAlbumName().equals (searchkey)) {
-            System.out.println("2");
+            current.head = resetHead(current.head);
             return true;
-        } else if (current.head.getAlbumName().compareTo (searchkey) > 0) {
-            System.out.println("3");
+        }
+        if (current.head.getAlbumName().compareTo (searchkey) < 0) {
             if (current.head.getNext() == null) {
-                System.out.println("4");
                 return false;
             } else {
-                System.out.println("5");
-                if(current.head.getNext().getAlbumName().equals (searchkey)) {
-                    System.out.println(current.head.getNext().getAlbumName().equals (searchkey));
+                current.head = current.head.getNext();
+                if(current.contains(searchkey)) {
                     return true;
-                } else {
-                    System.out.println("7");
-                    current.head = current.head.getNext();
-                    current.contains(searchkey);
                 }
-                //root.getLeftChild().contains (searchkey);
             }
         }
-        System.out.println("8");
+        current.head = resetHead(current.head);
         return false;
-    }*/
-
+    }
 }

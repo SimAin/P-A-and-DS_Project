@@ -13,8 +13,6 @@ public class album {
         this.albumName = albumName;
     }
 
-    public album() {}
-
     public void set(album newA) {
         this.setAlbumName(newA.albumName);
         this.setArtistName(newA.artistName);
@@ -46,17 +44,6 @@ public class album {
     }
     public void setAlbumName(String albumName) {
         this.albumName = albumName;
-    }
-
-    public String findArtistFromAlbum (String searchkey) {
-        if (this.getAlbumName().equals(searchkey)) {
-            return this.artistName;
-        }
-        if (next == null) {
-            return null;
-        } else {
-            return next.findArtistFromAlbum(searchkey);
-        }
     }
 
     // Take data, create node and place it in last item
