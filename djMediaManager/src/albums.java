@@ -17,17 +17,6 @@ public class albums {
     @Override
     public String toString() {
         album current = head;
-        String result = "{" + current.getArtistName() + ", " + current.getAlbumName() + "}, ";
-
-        while (current.getNext() != null) {
-            result = result + "{" + current.getNext().getArtistName() + ", " + current.getNext().getAlbumName() + "}, ";
-            current = current.getNext();
-        }
-        return result;
-    }
-
-    public String toString(boolean vert) {
-        album current = head;
         String result = "\n{" + current.getArtistName() + ", " + current.getAlbumName() + "}, ";
 
         while (current.getNext() != null) {
@@ -76,7 +65,53 @@ public class albums {
         return size;
     }
 
-    public void bubbleSort() {
+    public void artistBubbleSort() {
+        int initialCount = getSize();
+        boolean madeSwap;
+        album tempArray = head;
+        int siz = this.getSize();
+        //If collection > 0
+        if (siz != 0) {
+            //Loop through list of albums until no swap is made
+            do {
+                //Set trigger to false for swap
+                madeSwap = false;
+                //Loop through each album to check for a swap
+                for (int i = 0; i < siz ; i = i + 1) {
+                    //If next album exists
+                    if (tempArray != null) {
+                        //If there is an item to swap it with
+                        if (tempArray.getNext() != null) {
+                            //Compare items to see if they are the right way round.
+                            //If not enter statement
+                            if (tempArray.getArtistName().compareTo(tempArray.getNext().getArtistName()) > 0) {
+                                //Swap items
+                                swap(tempArray);
+                                madeSwap = true;
+                            } else if ((tempArray.getArtistName().compareTo(tempArray.getNext().getArtistName()) == 0) && (tempArray.getAlbumName().compareTo(tempArray.getNext().getAlbumName()) > 0)) {
+                                //Swap items
+                                swap(tempArray);
+                                madeSwap = true;
+                            }
+                        }
+                    }
+                    //Set the current head to the next item, unless this is last item
+                    if (tempArray.getNext() != null) {
+                        tempArray = tempArray.getNext();
+                    } else {
+                        tempArray = head;
+                    }
+                }
+                //Following loop, reset head of list to start.
+                tempArray = resetHead(tempArray);
+
+            } while (madeSwap);
+        }
+        //Reset head to temp
+        this.head = tempArray;
+    }
+
+    public void albumBubbleSort() {
         int initialCount = getSize();
         boolean madeSwap;
         album tempArray = head;
@@ -113,10 +148,6 @@ public class albums {
                 tempArray = resetHead(tempArray);
 
             } while (madeSwap);
-        }
-
-        if(initialCount != getSize()) {
-            System.out.println("Error: Sizes do not match after bubble sort.");
         }
 
         //Reset head to temp
