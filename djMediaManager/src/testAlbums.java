@@ -1,9 +1,12 @@
 public class testAlbums {
 
+    public static boolean errorTrigger = false;
+
     public static boolean checkStringValues(String data, String expected) {
         if(data.equals(expected)) {
             return false;
         } else {
+            errorTrigger = true;
             System.out.println("expected: " + expected);
             System.out.println("actual: " + data);
             System.out.println(" ");
@@ -15,6 +18,7 @@ public class testAlbums {
         if(data == expected) {
             return false;
         } else {
+            errorTrigger = true;
             System.out.println("expected: " + expected);
             System.out.println("actual: " + data);
 
@@ -26,6 +30,7 @@ public class testAlbums {
         if(data ) {
             return false;
         } else {
+            errorTrigger = true;
             System.out.println("expected: True" );
             System.out.println("actual: False" );
 
@@ -49,6 +54,16 @@ public class testAlbums {
                                                     "{The Gaslight Anthem, American Slang}, \n" +
                                                     "{Iron Maiden, Somewhere In Time}, \n" +
                                                     "{Iron Maiden, The Number Of The Beast}, \n" +
+                                                    "{David Bowie, Scary Monsters}, \n" +
+                                                    "{Prince, Purple Rain}, \n" +
+                                                    "{Sleigh Bells, Treats}, \n" +
+                                                    "{Band of Skulls, Sweet Sour}, \n" +
+                                                    "{Phill Collins, No Jacket Required}, \n" +
+                                                    "{Run-D.M.C, Tougher Than Leather}, \n" +
+                                                    "{Biffy Clyro, Only Revolutions}, \n" +
+                                                    "{Bruce Springsteen, Born To Run}, \n" +
+                                                    "{Bruce Springsteen, The River}, \n" +
+                                                    "{Bruce Springsteen, Born In The U.S.A}, \n" +
                                                     "{AC/DC, The Razors Edge}, \n" +
                                                     "{AC/DC, Highway to Hell}, \n" +
                                                     "{AC/DC, For Those About to Rock (We Salute You)}, \n" +
@@ -56,7 +71,7 @@ public class testAlbums {
                                                     "{Metallica, Death Magnetic}, \n" +
                                                     "{Metallica, Some Kind Of Monster}, \n" +
                                                     "{Metallica, St Anger}, ");
-        checkIntValues(head.getSize(),14);
+        checkIntValues(head.getSize(),24);
 
         head.albumBubbleSort();
 
@@ -64,19 +79,29 @@ public class testAlbums {
         //Enables better data for checking sorting output later
         checkStringValues(head.toString(),"\n{Green Day, American Idiot}, \n" +
                                                     "{The Gaslight Anthem, American Slang}, \n" +
+                                                    "{Bruce Springsteen, Born In The U.S.A}, \n" +
+                                                    "{Bruce Springsteen, Born To Run}, \n" +
                                                     "{Metallica, Death Magnetic}, \n" +
                                                     "{Frank Turner, England keep my bones}, \n" +
                                                     "{AC/DC, For Those About to Rock (We Salute You)}, \n" +
                                                     "{Metallica, Hardwired}, \n" +
                                                     "{AC/DC, Highway to Hell}, \n" +
+                                                    "{Phill Collins, No Jacket Required}, \n" +
+                                                    "{Biffy Clyro, Only Revolutions}, \n" +
                                                     "{Frank Turner, Positive Songs for Negative People}, \n" +
+                                                    "{Prince, Purple Rain}, \n" +
+                                                    "{David Bowie, Scary Monsters}, \n" +
                                                     "{Metallica, Some Kind Of Monster}, \n" +
                                                     "{Iron Maiden, Somewhere In Time}, \n" +
                                                     "{Metallica, St Anger}, \n" +
+                                                    "{Band of Skulls, Sweet Sour}, \n" +
                                                     "{Iron Maiden, The Number Of The Beast}, \n" +
                                                     "{AC/DC, The Razors Edge}, \n" +
+                                                    "{Bruce Springsteen, The River}, \n" +
+                                                    "{Run-D.M.C, Tougher Than Leather}, \n" +
+                                                    "{Sleigh Bells, Treats}, \n" +
                                                     "{Against Me, White Crosses / Black Crosses}, " );
-        checkIntValues(head.getSize(),14);
+        checkIntValues(head.getSize(),24);
 
         head.artistBubbleSort();
 
@@ -86,6 +111,12 @@ public class testAlbums {
                                                     "{AC/DC, Highway to Hell}, \n" +
                                                     "{AC/DC, The Razors Edge}, \n" +
                                                     "{Against Me, White Crosses / Black Crosses}, \n" +
+                                                    "{Band of Skulls, Sweet Sour}, \n" +
+                                                    "{Biffy Clyro, Only Revolutions}, \n" +
+                                                    "{Bruce Springsteen, Born In The U.S.A}, \n" +
+                                                    "{Bruce Springsteen, Born To Run}, \n" +
+                                                    "{Bruce Springsteen, The River}, \n" +
+                                                    "{David Bowie, Scary Monsters}, \n" +
                                                     "{Frank Turner, England keep my bones}, \n" +
                                                     "{Frank Turner, Positive Songs for Negative People}, \n" +
                                                     "{Green Day, American Idiot}, \n" +
@@ -95,18 +126,25 @@ public class testAlbums {
                                                     "{Metallica, Hardwired}, \n" +
                                                     "{Metallica, Some Kind Of Monster}, \n" +
                                                     "{Metallica, St Anger}, \n" +
+                                                    "{Phill Collins, No Jacket Required}, \n" +
+                                                    "{Prince, Purple Rain}, \n" +
+                                                    "{Run-D.M.C, Tougher Than Leather}, \n" +
+                                                    "{Sleigh Bells, Treats}, \n" +
                                                     "{The Gaslight Anthem, American Slang}, " );
-        checkIntValues(head.getSize(),14);
+        checkIntValues(head.getSize(),24);
 
         //Test positive searches
         checkBooleanValues(head.contains("The Razors Edge"));
-        //TODO: Currently returning error
-        //checkBooleanValues(head.contains("The Number Of The Beast"));
-        //checkBooleanValues(head.contains("St Anger"));
+        checkBooleanValues(head.contains("The Number Of The Beast"));
+        checkBooleanValues(head.contains("St Anger"));
 
         //Test negative searches
         checkBooleanValues(!head.contains("Razors"));
         checkBooleanValues(!head.contains(""));
         checkBooleanValues(!head.contains("123"));
+
+        if(!errorTrigger){
+            System.out.println("Tests complete: All tests passed, No errors found");
+        }
     }
 }

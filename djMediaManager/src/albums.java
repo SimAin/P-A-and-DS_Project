@@ -199,8 +199,7 @@ public class albums {
         if (current.head.getAlbumName().equals (searchkey)) {
             current.head = resetHead(current.head);
             return true;
-        }
-        if (current.head.getAlbumName().compareTo (searchkey) < 0) {
+        } else {
             if (current.head.getNext() == null) {
                 return false;
             } else {

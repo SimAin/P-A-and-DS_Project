@@ -1,9 +1,12 @@
 public class testAlbum {
 
+    public static boolean errorTrigger = false;
+
     public static boolean checkStringValues(String data, String expected) {
         if(data.equals(expected)) {
             return false;
         } else {
+            errorTrigger = true;
             System.out.println("expected: " + expected);
             System.out.println("actual: " + data);
             System.out.println(" ");
@@ -54,5 +57,9 @@ public class testAlbum {
         //Testing set was successful
         checkStringValues(albumList.getHead().getArtistName(),"Rose");
         checkStringValues(albumList.getHead().getAlbumName(),"By any other name");
+
+        if(!errorTrigger){
+            System.out.println("Tests complete: All tests passed, No errors found");
+        }
     }
 }
