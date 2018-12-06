@@ -1,5 +1,5 @@
 public class schoolManager {
-    private scoreToGrade<Integer> node;
+
     public static void main (String[] args) {
 
         student topStudent = dataLists.getDataLists();
@@ -18,22 +18,28 @@ public class schoolManager {
         65-75 = C
         45-65 = D
         20-45 = F
-        0-20 = U
+        0-20 = U*/
 
-        scoreToGrade<Integer> nodeA = new scoreToGrade<>(95, "A*");
-        scoreToGrade<Integer> nodeB = new scoreToGrade<>(85, "A");
-        scoreToGrade<Integer> nodeC = new scoreToGrade<>(75, "B");
-
-        scoreToGrade<Integer> nodeD = new scoreToGrade<>(65, "C");
-        scoreToGrade<Integer> nodeE = new scoreToGrade<>(45, "D");
+        scoreToGrade<Integer> nodeAA = new scoreToGrade<>(95, "A*");
+        scoreToGrade<Integer> nodeA = new scoreToGrade<>(85, "A");
+        scoreToGrade<Integer> nodeB = new scoreToGrade<>(75, "B");
+        scoreToGrade<Integer> nodeC = new scoreToGrade<>(65, "C");
+        scoreToGrade<Integer> nodeD = new scoreToGrade<>(45, "D");
         scoreToGrade<Integer> nodeF = new scoreToGrade<>(20, "F");
-        scoreToGrade<Integer> nodeG = new scoreToGrade<>(0, "U");
+        scoreToGrade<Integer> nodeU = new scoreToGrade<>(0, "U");
 
-        nodeA.setLeftChild(nodeC);
-        nodeA.setRightChild(nodeB);
-        nodeC.setLeftChild(nodeD);
-        nodeC.setRightChild(nodeE);
+        nodeC.setLeftChild(nodeB);
+        nodeC.setRightChild(nodeD);
+        nodeB.setLeftChild(nodeAA);
+        nodeB.setRightChild(nodeA);
+        nodeD.setLeftChild(nodeF);
+        nodeD.setRightChild(nodeU);
 
-        node = nodeA;*/
+        scoreToGrade<Integer> node = nodeC;
+
+        node.showTree();
+
+        node.setGrade(y7c2);
+        System.out.println(y7c2.gradesToString());
     }
 }

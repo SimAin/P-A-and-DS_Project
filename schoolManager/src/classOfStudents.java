@@ -58,6 +58,19 @@ public class classOfStudents {
         return result;
     }
 
+    public String gradesToString() {
+        student current = head;
+        String result = "\n{" + current.getSurname() + ", " + current.getForename() + ", " + current.getExamGrade() +"}, ";
+
+        while (current.getNext() != null) {
+            result = result + "\n{" + current.getNext().getSurname() + ", " + current.getNext().getForename() + ", " + current.getExamGrade() + "}, ";
+            current = current.getNext();
+        }
+        return result;
+    }
+
+
+
     //Test method to
     public void setRandomScores(){
         Random rand = new Random();
@@ -71,4 +84,5 @@ public class classOfStudents {
             current = current.getPrevious();
         }
     }
+
 }

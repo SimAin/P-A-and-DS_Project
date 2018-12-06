@@ -53,4 +53,12 @@ public class student {
     public void setSurname(String surname) {
         this.surname = surname;
     }
+
+    public String getExamGrade() {
+        return examGrade;
+    }
+
+    public void setExamGrade(String examGrade) {
+        this.examGrade = examGrade;
+    }
 }
