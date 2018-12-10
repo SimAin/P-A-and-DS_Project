@@ -60,22 +60,34 @@ public class classOfStudents {
 
     public String gradesToString() {
         student current = head;
-        String result = "\n{" + current.getSurname() + ", " + current.getForename() + ", " + current.getExamGrade() +"}, ";
+        String result = "\n{" + current.getSurname() + ", " + current.getForename() + ", " + current.getexamScore() + ", " + current.getExamGrade() +"}, ";
 
         while (current.getNext() != null) {
-            result = result + "\n{" + current.getNext().getSurname() + ", " + current.getNext().getForename() + ", " + current.getExamGrade() + "}, ";
+            result = result + "\n{" + current.getNext().getSurname() + ", " + current.getNext().getForename() + ", " + current.getexamScore() + ", "+ current.getExamGrade() + "}, ";
             current = current.getNext();
         }
         return result;
     }
 
-
+    public student resetHead(student tempArray){
+        boolean foundStart = false;
+        while (!foundStart) {
+            if (tempArray.getPrevious() == null) {
+                foundStart = true;
+            } else {
+                tempArray = tempArray.getPrevious();
+            }
+        }
+        return tempArray;
+    }
 
     //Test method to
     public void setRandomScores(){
         Random rand = new Random();
         student current = head;
         while (current.getNext() != null) {
+            //current.setexamScore(90);
+            //current = current.getNext();
             current.setexamScore(rand.nextInt(80) + 20);
             current = current.getNext();
         }
