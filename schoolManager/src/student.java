@@ -14,6 +14,13 @@ public class student {
         this.surname = surname;
     }
 
+    public void set(student newStudent) {
+        this.setNext(newStudent.next);
+        this.setPrevious(newStudent.previous);
+        this.setForename(newStudent.forename);
+        this.setSurname(newStudent.surname);
+    }
+
     public student getNext() {
         return next;
     }

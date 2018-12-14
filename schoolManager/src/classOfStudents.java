@@ -11,6 +11,12 @@ public class classOfStudents {
         this.className = className;
     }
 
+    public classOfStudents() { // TODO: swap string to StaffMember
+        this.head = null;
+        this.teacher = null;
+        this.className = null;
+    }
+
     public String getTeacher() {
         return teacher;
     }
@@ -33,6 +39,19 @@ public class classOfStudents {
 
     public void setHead(student head) {
         this.head = head;
+    }
+
+    public int getSize() {
+        int size = 0;
+        if (head != null) {
+            size++;
+            student current = head;
+            while (current.getNext() != null) {
+                size++;
+                current = current.getNext();
+            }
+        }
+        return size;
     }
 
     @Override
@@ -81,13 +100,11 @@ public class classOfStudents {
         return tempArray;
     }
 
-    //Test method to
+    //Test method to set random scores as examples
     public void setRandomScores(){
         Random rand = new Random();
         student current = head;
         while (current.getNext() != null) {
-            //current.setexamScore(90);
-            //current = current.getNext();
             current.setexamScore(rand.nextInt(80) + 20);
             current = current.getNext();
         }
