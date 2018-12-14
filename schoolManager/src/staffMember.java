@@ -4,6 +4,13 @@ public class staffMember {
     private String jobTitle;
     private staffMember superior;
 
+    public staffMember(String fname, String sname, String job, staffMember boss) {
+        this.forename = fname;
+        this.surname = sname;
+        this.jobTitle = job;
+        this.superior = boss;
+    }
+
     public String getForename() {
         return forename;
     }

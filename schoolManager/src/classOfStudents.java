@@ -1,11 +1,11 @@
 import java.util.Random;
 public class classOfStudents {
-    private String teacher; // TODO: swap string to StaffMember
+    private staffMember teacher; // TODO: swap string to StaffMember
     private String className;
 
     private student head;
 
-    public classOfStudents(student head, String teacher, String className) { // TODO: swap string to StaffMember
+    public classOfStudents(student head, staffMember teacher, String className) { // TODO: swap string to StaffMember
         this.head = head;
         this.teacher = teacher;
         this.className = className;
@@ -17,11 +17,11 @@ public class classOfStudents {
         this.className = null;
     }
 
-    public String getTeacher() {
+    public staffMember getTeacher() {
         return teacher;
     }
 
-    public void setTeacher(String teacher) {
+    public void setTeacher(staffMember teacher) {
         this.teacher = teacher;
     }
 

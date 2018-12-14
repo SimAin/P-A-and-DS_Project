@@ -3,7 +3,7 @@ public class schoolManager {
     public static void main (String[] args) {
 
         student topStudent = dataLists.getDataLists();
-        classOfStudents y7c2 = new classOfStudents(topStudent, "Mrs Simpson", "y7c2");
+        classOfStudents y7c2 = new classOfStudents(topStudent, new staffMember("Mrs Simpson", "", "", null), "y7c2");
         //y7c2.setHead(topStudent);
 
         System.out.println(y7c2.toString());
