@@ -16,7 +16,7 @@ public class testStudent {
     // Main method to run tests.
     public static void main (String[] args) {
 
-        student album = dataLists.getDataLists();
+        student album = dataLists.getDataList1();
         classOfStudents studentList = new classOfStudents();
         studentList.setHead(album);
 

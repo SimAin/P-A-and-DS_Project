@@ -40,7 +40,7 @@ public class testClassOfStudents {
     // Main method to run tests.
     public static void main (String[] args) {
 
-        student album = dataLists.getDataLists();
+        student album = dataLists.getDataList1();
         classOfStudents head = new classOfStudents();
         head.setHead(album);
 

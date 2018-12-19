@@ -5,7 +5,7 @@ public class student {
     private String forename;
     private String surname;
 
-    private int examScore;
+    private int examScore = 0;
     private String examGrade;
 
     public student(student next, String forename, String surname) {

@@ -2,23 +2,21 @@ public class schoolManager {
 
     public static void main (String[] args) {
 
-        student topStudent = dataLists.getDataLists();
-        classOfStudents y7c2 = new classOfStudents(topStudent, new staffMember("Mrs Simpson", "", "", null), "y7c2");
-        //y7c2.setHead(topStudent);
+        staffMember headTeacher = new staffMember("Gorden", "Newport", "Headteacher", null);
+
+        student topStudent = dataLists.getDataList1();
+        classOfStudents y7c2 = new classOfStudents(topStudent, new staffMember("Mrs Simpson", "", "Year7 Teacher", headTeacher), "y7c2");
 
         System.out.println(y7c2.toString());
-
         y7c2.setRandomScores();
+        y7c2.sortStudentsBySurname();
 
-        System.out.println(y7c2.scoresToString());
+        student topStudent2 = dataLists.getDataList1();
+        classOfStudents y8c1 = new classOfStudents(topStudent2, new staffMember("Mr Rodgers", "", "Year8 Teacher", headTeacher), "y8c1");
 
-        /*95-100 = A*
-        85-95 = A
-        75-85 = B
-        65-75 = C
-        45-65 = D
-        20-45 = F
-        0-20 = U*/
+        System.out.println(y7c2.toString());
+        y8c1.setRandomScores();
+        y8c1.sortStudentsBySurname();
 
         scoreToGrade<Integer> nodeAA = new scoreToGrade<>(95,100, "A*");
         scoreToGrade<Integer> nodeA = new scoreToGrade<>(85, 94, "A");
@@ -39,7 +37,16 @@ public class schoolManager {
 
         node.showTree();
 
+        System.out.println();
         node.setGrade(y7c2);
+        System.out.println(y7c2.getTeacher().getForename() + " " + y7c2.getTeacher().getSurname());
         System.out.println(y7c2.gradesToString());
+        System.out.println(y7c2.getClassScoreAverage());
+
+        System.out.println();
+        node.setGrade(y8c1);
+        System.out.println(y8c1.getTeacher().getForename() + " " + y8c1.getTeacher().getSurname());
+        System.out.println(y8c1.gradesToString());
+        System.out.println(y8c1.getClassScoreAverage());
     }
 }
