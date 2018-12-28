@@ -1,4 +1,3 @@
-
 public class mediaManager {
 
     public static void main (String[] args) {
@@ -6,9 +5,6 @@ public class mediaManager {
         album album = mediaList.getMediaList();
         albums head = new albums();
         head.setHead(album);
-
-        System.out.println(head.toString());
-        System.out.println("Size: " + head.getSize());
 
         head.albumBubbleSort();
 
