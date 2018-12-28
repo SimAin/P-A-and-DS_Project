@@ -5,22 +5,15 @@ import java.io.InputStreamReader;
 public class mediaManager {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
+    //TODO: Comment all methods (other than main)
     public static void main (String[] args) throws IOException {
 
-/*        System.out.print("Please enter a height for your board: ");
-        int height = Integer.parseInt(br.readLine());
-        System.out.println(height);
-
-        */
-
         boolean exit = false;
-
 
         album album = mediaList.getMediaList();
         albums head = new albums();
         head.setHead(album);
         System.out.println(head.toString());
-
 
         while (!exit) {
             System.out.println();
@@ -65,11 +58,6 @@ public class mediaManager {
                 System.out.println("Error please try again.");
             }
         }
-
-
-
-
-
     }
 
     public static void printing(albums head){
@@ -85,16 +73,21 @@ public class mediaManager {
         if(search.equals("album") || search.equals("album")){
             System.out.println("Type album to search for: :");
             String album_in = (br.readLine());
-            boolean res = head.contains(album_in);
+            boolean res = head.contains(album_in, true);
             if(res) {
                 System.out.println("The album " + album_in + " was found in the collection.");
             } else if(!res) {
                 System.out.println("The album " + album_in + " was NOT found in the collection.");
             }
         } else if(search.equals("artist") || search.equals("Artist")) {
-            //TODO: artist contains
-
-            head.contains("The Razors Edge");
+            System.out.println("Type artist to search for: :");
+            String artist_in = (br.readLine());
+            boolean res = head.contains(artist_in, false);
+            if(res) {
+                System.out.println("The artist " + artist_in + " was found in the collection.");
+            } else if(!res) {
+                System.out.println("The artist " + artist_in + " was NOT found in the collection.");
+            }
         }
     }
 }

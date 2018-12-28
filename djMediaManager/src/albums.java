@@ -88,7 +88,7 @@ public class albums {
                                 //Swap items
                                 swap(tempArray);
                                 madeSwap = true;
-                            } else if ((tempArray.getArtistName().compareTo(tempArray.getNext().getArtistName()) == 0) && (tempArray.getAlbumName().compareTo(tempArray.getNext().getAlbumName()) > 0)) {
+                            } else if ((tempArray.getArtistName().compareTo(tempArray.getNext().getArtistName()) == 0) && (tempArray.getArtistName().compareTo(tempArray.getNext().getArtistName()) > 0)) {
                                 //Swap items
                                 swap(tempArray);
                                 madeSwap = true;
@@ -193,9 +193,15 @@ public class albums {
         return tempArray;
     }
 
-    public boolean contains (String searchkey) {
+    public boolean contains (String searchkey, boolean decision) {
         albums current = this;
-        if (current.head.getAlbumName().equals (searchkey)) {
+        boolean equal;
+        if(decision){
+            equal = current.head.getAlbumName().equals (searchkey);
+        } else {
+            equal = current.head.getArtistName().equals (searchkey);
+        }
+        if (equal) {
             current.head = resetHead(current.head);
             return true;
         } else {
@@ -203,7 +209,7 @@ public class albums {
                 return false;
             } else {
                 current.head = current.head.getNext();
-                if(current.contains(searchkey)) {
+                if(current.contains(searchkey, decision)) {
                     return true;
                 }
             }

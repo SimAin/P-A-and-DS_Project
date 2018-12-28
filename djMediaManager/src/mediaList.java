@@ -25,7 +25,6 @@ public class mediaList {
         album gdAm = new album (ftPs, "Green Day", "American Idiot");
         album amWc = new album (gdAm, "Against Me", "White Crosses / Black Crosses");
 
-
         metSt.setPrevious(metSo);
         metSo.setPrevious(metD);
         metD.setPrevious(metH);

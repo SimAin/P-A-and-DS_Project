@@ -4,8 +4,6 @@ public class album {
 
     private String artistName;
     private  String albumName;
-    //public String genera;
-    //public int numberOfTracks;
 
     public album (album next, String artistName, String albumName) {
         this.next = next;
@@ -21,6 +19,7 @@ public class album {
     public album getNext() {
         return next;
     }
+
     public void setNext(album next) {
         this.next = next;
     }
@@ -28,6 +27,7 @@ public class album {
     public album getPrevious() {
         return previous;
     }
+
     public void setPrevious(album previous) {
         this.previous = previous;
     }
@@ -35,6 +35,7 @@ public class album {
     public String getArtistName() {
         return artistName;
     }
+
     public void setArtistName(String artistName) {
         this.artistName = artistName;
     }
@@ -42,11 +43,11 @@ public class album {
     public String getAlbumName() {
         return albumName;
     }
+
     public void setAlbumName(String albumName) {
         this.albumName = albumName;
     }
 
-    // Take data, create node and place it in last item
     public void join (album data) {
         album current = this;
 
@@ -57,7 +58,6 @@ public class album {
         current.setNext (new album (null, data.artistName, data.albumName));
     }
 
-    // Delete node in list
     public album delete (int index) {
         album current = this;
         int currentIndex = 0;
