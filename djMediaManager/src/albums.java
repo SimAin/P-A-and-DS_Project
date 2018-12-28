@@ -1,6 +1,7 @@
 public class albums {
     private album head;
 
+    //TODO: comment all methods
 
     public albums() {
         head = null;
@@ -66,7 +67,6 @@ public class albums {
     }
 
     public void artistBubbleSort() {
-        int initialCount = getSize();
         boolean madeSwap;
         album tempArray = head;
         int siz = this.getSize();
@@ -112,7 +112,6 @@ public class albums {
     }
 
     public void albumBubbleSort() {
-        int initialCount = getSize();
         boolean madeSwap;
         album tempArray = head;
         int siz = this.getSize();
