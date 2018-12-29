@@ -68,14 +68,18 @@ public class scoreToGrade<T> {
 
         scoreToGrade current = this;
         scoreToGrade reset = this;
-
-        while (students.getHead().getNext() != null) {
+        boolean done = false;
+        while (!done) {
             //If either of the child nodes are null, it must be that grade so set.
             //OR
             //If the scores are in the bandwidth for the current node set.
             if((current.getRightChild() == null || current.getLeftChild() == null) || (students.getHead().getexamScore() <= current.getHighestScore() && students.getHead().getexamScore() >= current.getLowestScore())){
                 students.getHead().setExamGrade(current.getGrade());
-                students.setHead(students.getHead().getNext());
+                if(students.getHead().getNext() == null){
+                    done = true;
+                } else {
+                    students.setHead(students.getHead().getNext());
+                }
                 current = reset;
             } else if (students.getHead().getexamScore() > current.getHighestScore()){
                 current = current.getLeftChild();
@@ -84,6 +88,6 @@ public class scoreToGrade<T> {
             }
         }
 
-         students.setHead(students.resetHead(students.getHead()));
+        students.setHead(students.resetHead(students.getHead()));
     }
 }

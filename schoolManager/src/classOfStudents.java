@@ -1,20 +1,20 @@
 import java.util.Random;
+import java.io.BufferedReader;
+import java.io.IOException;
+
 public class classOfStudents {
     private staffMember teacher;
-    private String className;
 
     private student head;
 
-    public classOfStudents(student head, staffMember teacher, String className) {
+    public classOfStudents(student head, staffMember teacher) {
         this.head = head;
         this.teacher = teacher;
-        this.className = className;
     }
 
     public classOfStudents() {
         this.head = null;
         this.teacher = null;
-        this.className = null;
     }
 
     public staffMember getTeacher() {
@@ -25,15 +25,8 @@ public class classOfStudents {
         this.teacher = teacher;
     }
 
-    public String getClassName() {
-        return className;
-    }
-
-    public void setClassName(String className) {
-        this.className = className;
-    }
-
-    public void addStudent(String forname, String surname) {
+    //Adds Student to class
+    public void addStudent(String forename, String surname) {
 
         student current = this.head;
 
@@ -41,10 +34,11 @@ public class classOfStudents {
             current = current.getNext ();
         }
 
-        current.setNext (new student (null, forname, surname));
+        current.setNext (new student (null, forename, surname));
 
     }
 
+    //Sorts students by surname
     public void sortStudentsBySurname() {
         int initialCount = getSize();
         boolean madeSwap;
@@ -91,6 +85,7 @@ public class classOfStudents {
         this.head = tempArray;
     }
 
+    //Swaps students in list, used for sort
     private student swap(student tempArray) {
         student temp = tempArray;
         student prev = tempArray.getPrevious();
@@ -119,14 +114,17 @@ public class classOfStudents {
         return tempArray;
     }
 
+    //Returns head of list
     public student getHead() {
         return head;
     }
 
+    //Sets head of class list
     public void setHead(student head) {
         this.head = head;
     }
 
+    //Gets size of class
     public int getSize() {
         int size = 0;
         if (head != null) {
@@ -140,6 +138,7 @@ public class classOfStudents {
         return size;
     }
 
+    //Returns an average of all students grades for teachers
     public int getClassScoreAverage() {
         int totalScore = 0;
         if (head != null) {
@@ -154,40 +153,20 @@ public class classOfStudents {
         return totalScore / this.getSize();
     }
 
+    //Returns a string with all students, their scores and grades
     @Override
     public String toString() {
         student current = head;
-        String result = "\n{" + current.getSurname() + ", " + current.getForename() + "}, ";
+        String result = "\n{" + current.getSurname() + ", " + current.getForename() + ", " + current.getNext().getexamScore() + ", " + current.getNext().getExamGrade() +"}, ";
 
         while (current.getNext() != null) {
-            result = result + "\n{" + current.getNext().getSurname() + ", " + current.getNext().getForename() + "}, ";
+            result = result + "\n{" + current.getNext().getSurname() + ", " + current.getNext().getForename() + ", " + current.getNext().getexamScore() + ", " + current.getNext().getExamGrade() + "}, ";
             current = current.getNext();
         }
         return result;
     }
 
-    public String scoresToString() {
-        student current = head;
-        String result = "\n{" + current.getSurname() + ", " + current.getForename() + ", " + current.getexamScore() +"}, ";
-
-        while (current.getNext() != null) {
-            result = result + "\n{" + current.getNext().getSurname() + ", " + current.getNext().getForename() + ", " + current.getexamScore() + "}, ";
-            current = current.getNext();
-        }
-        return result;
-    }
-
-    public String gradesToString() {
-        student current = head;
-        String result = "\n{" + current.getSurname() + ", " + current.getForename() + ", " + current.getexamScore() + ", " + current.getExamGrade() +"}, ";
-
-        while (current.getNext() != null) {
-            result = result + "\n{" + current.getNext().getSurname() + ", " + current.getNext().getForename() + ", " + current.getexamScore() + ", "+ current.getExamGrade() + "}, ";
-            current = current.getNext();
-        }
-        return result;
-    }
-
+    //Used to reset head of list after iterating through list
     public student resetHead(student tempArray){
         boolean foundStart = false;
         while (!foundStart) {
@@ -200,8 +179,27 @@ public class classOfStudents {
         return tempArray;
     }
 
-    //TODO: Make a teacher method for setting scores.
-    //Test method to set random scores as examples
+    //Iterates through class asking teacher to set scores for students
+    public void setScores(BufferedReader br) throws IOException {
+
+        student current = head;
+        while (current.getNext() != null) {
+            System.out.println("Please type score for: " + current.getForename() + " " + current.getSurname());
+            int score = Integer.parseInt((br.readLine()));
+            current.setexamScore(score);
+            current = current.getNext();
+        }
+        //Covers last student in list
+        System.out.println("Please type score for: " + current.getForename() + " " + current.getSurname());
+        int score = Integer.parseInt((br.readLine()));
+        current.setexamScore(score);
+
+        while (current.getPrevious() != null) {
+            current = current.getPrevious();
+        }
+    }
+
+    //TEST METHOD - To set random scores as examples
     public void setRandomScores(){
         Random rand = new Random();
         student current = head;
@@ -209,10 +207,10 @@ public class classOfStudents {
             current.setexamScore(rand.nextInt(80) + 20);
             current = current.getNext();
         }
+        current.setexamScore(rand.nextInt(80) + 20);
 
         while (current.getPrevious() != null) {
             current = current.getPrevious();
         }
     }
-
 }
