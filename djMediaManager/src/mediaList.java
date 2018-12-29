@@ -1,4 +1,5 @@
 public class mediaList {
+    //Test data for running application
     public static album getMediaList() {
         album metSt = new album (null, "Metallica", "St Anger");
         album metSo = new album (metSt, "Metallica", "Some Kind Of Monster");

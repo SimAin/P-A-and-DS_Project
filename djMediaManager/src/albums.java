@@ -1,20 +1,22 @@
 public class albums {
     private album head;
 
-    //TODO: comment all methods
-
+    //Constructor for albums
     public albums() {
         head = null;
     }
 
+    //Sets head of list
     public void setHead(album head) {
         this.head = head;
     }
 
+    //Gets head of list
     public album getHead() {
         return head;
     }
 
+    //Returns sting of list of albums with artist and album printed
     @Override
     public String toString() {
         album current = head;
@@ -27,6 +29,7 @@ public class albums {
         return result;
     }
 
+    //Returns size of collection
     public int getSize() {
         int size = 0;
         if (head != null) {
@@ -40,6 +43,7 @@ public class albums {
         return size;
     }
 
+    //Returns number of different artists in list
     public int getArtistCount() {
         int size = 0;
         int counter = 0;
@@ -66,6 +70,7 @@ public class albums {
         return size;
     }
 
+    //Does a sort of the collection by artist
     public void artistBubbleSort() {
         boolean madeSwap;
         album tempArray = head;
@@ -111,6 +116,7 @@ public class albums {
         this.head = tempArray;
     }
 
+    //Does a sort of the albums by artist
     public void albumBubbleSort() {
         boolean madeSwap;
         album tempArray = head;
@@ -153,6 +159,7 @@ public class albums {
         this.head = tempArray;
     }
 
+    //Resets the head of the list after an iteration
     public album resetHead(album tempArray) {
         boolean foundStart = false;
         while (!foundStart) {
@@ -165,6 +172,7 @@ public class albums {
         return tempArray;
     }
 
+    //Swaps two albums, used in sorting
     private album swap(album tempArray) {
         album temp = tempArray;
         album prev = tempArray.getPrevious();
@@ -193,6 +201,7 @@ public class albums {
         return tempArray;
     }
 
+    //Search method for the albums
     public boolean contains (String searchkey, boolean decision) {
         albums current = this;
         boolean equal;

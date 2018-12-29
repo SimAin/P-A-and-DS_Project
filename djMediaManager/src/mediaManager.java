@@ -5,7 +5,9 @@ import java.io.InputStreamReader;
 public class mediaManager {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
-    //TODO: Comment all methods (other than main)
+    // --- *** ---
+    //Main method to run system
+    // --- *** ---
     public static void main (String[] args) throws IOException {
 
         boolean exit = false;
@@ -60,12 +62,14 @@ public class mediaManager {
         }
     }
 
+    //Prints current list
     public static void printing(albums head){
         System.out.println("Sorted array:  ");
         System.out.println(head.toString());
         System.out.println();
     }
 
+    //Runs search on list and prints output depending on result
     public static void searching(albums head) throws IOException {
         System.out.println("To search for an album please type 'album':");
         System.out.println("To search for an artist please type 'artist':");
