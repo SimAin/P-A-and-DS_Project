@@ -40,13 +40,12 @@ public class testClassOfStudents {
     // Main method to run tests.
     public static void main (String[] args) {
 
-        student album = dataLists.getDataList1();
-        classOfStudents head = new classOfStudents();
-        head.setHead(album);
+        classOfStudents new_class = new classOfStudents();
+        new_class.setStudents(dataLists.getDataList1(35));
 
         //Check start order is as expected
         //Enables better data for checking sorting output later
-        checkStringValues(head.toString(),"\n{Lynn, Robert}, \n" +
+        checkStringValues(new_class.toString(),"\n{Lynn, Robert}, \n" +
                 "{Flowers, Daisy}, \n" +
                 "{Bennett, Gerrie}, \n" +
                 "{Potter, Franky}, \n" +
@@ -70,7 +69,7 @@ public class testClassOfStudents {
                 "{White, Dave}, \n" +
                 "{Weaver, Lucy}, \n" +
                 "{Smith, Rodger}, ");
-        checkIntValues(head.getSize(),24);
+        checkIntValues(new_class.getCurrentSize(),24);
 
         if(!errorTrigger){
             System.out.println("Tests complete: All tests passed, No errors found");

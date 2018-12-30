@@ -64,30 +64,32 @@ public class scoreToGrade<T> {
         //System.out.println ("Node: " + grade);  // Post Order
     }
 
-    public void setGrade (classOfStudents students) {
+    public void setGrade (classOfStudents schoolClass) {
 
         scoreToGrade current = this;
         scoreToGrade reset = this;
-        boolean done = false;
-        while (!done) {
-            //If either of the child nodes are null, it must be that grade so set.
-            //OR
-            //If the scores are in the bandwidth for the current node set.
-            if((current.getRightChild() == null || current.getLeftChild() == null) || (students.getHead().getexamScore() <= current.getHighestScore() && students.getHead().getexamScore() >= current.getLowestScore())){
-                students.getHead().setExamGrade(current.getGrade());
-                if(students.getHead().getNext() == null){
+        for (int i = 0; i < schoolClass.getCurrentSize() ; i++) {
+
+            boolean done = false;
+
+            while (!done) {
+                //If either of the child nodes are null, it must be that grade so set.
+                //OR
+                //If the scores are in the bandwidth for the current node set.
+                if((current.getRightChild() == null || current.getLeftChild() == null) || (schoolClass.getStudents()[i].getExamScore() <= current.getHighestScore() && schoolClass.getStudents()[i].getExamScore() >= current.getLowestScore())){
+                    schoolClass.getStudents()[i].setExamGrade(current.getGrade());
+                    current = reset;
                     done = true;
-                } else {
-                    students.setHead(students.getHead().getNext());
+                } else if (schoolClass.getStudents()[i].getExamScore() > current.getHighestScore()){
+                    current = current.getLeftChild();
+                } else if (schoolClass.getStudents()[i].getExamScore() < current.getLowestScore()){
+                    current = current.getRightChild();
                 }
-                current = reset;
-            } else if (students.getHead().getexamScore() > current.getHighestScore()){
-                current = current.getLeftChild();
-            } else if (students.getHead().getexamScore() < current.getLowestScore()){
-                current = current.getRightChild();
             }
+
+
+
         }
 
-        students.setHead(students.resetHead(students.getHead()));
     }
 }

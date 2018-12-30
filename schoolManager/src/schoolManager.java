@@ -26,53 +26,60 @@ public class schoolManager {
 
         scoreToGrade<Integer> node = nodeC;
 
-        student topStudent = dataLists.getDataList1();
-        classOfStudents y7c2 = new classOfStudents(topStudent, new staffMember("Mrs Simpson", "", "Year7 Teacher", null));
+        student[] studentList = new student[35];
+        studentList = dataLists.getDataList1(35);
+        classOfStudents y7c2 = new classOfStudents( new staffMember("Mrs Simpson", "", "Year7 Teacher", null), 35, 24);
+        y7c2.setStudents(studentList);
+
 
         while (!exit) {
             System.out.println();
             System.out.println("The students listed above have been imported");
             System.out.println("Please type 'view' to see students:");
             System.out.println("Please type 'sort' to sort them by surname:");
-            System.out.println("Please type 'score' to run through them and apply scores:");
+            System.out.println("Please type 'score' to run through the students and apply scores:");
             System.out.println("To skip and apply random scores for testing, please type 'random':");
             System.out.println("To search for a student type 'search':");
             System.out.println("To set grades please type 'grade':");
-            System.out.println("To get class size please type 'count':");
+            System.out.println("To get class size and score average please type 'details':");
             System.out.println("To add a new student please type 'add' and to delete a student please type 'delete'"); //TODO: add delete
             System.out.println("Please type 'exit' to end:");
             String input = (br.readLine());
 
             if(input.equals("sort") || input.equals("sort")) {
-                y7c2.sortStudentsBySurname();
+                //TODO: New sorting function
+                //y7c2.sortStudentsBySurname();
                 printing(y7c2);
 
             } else if(input.equals("search") || input.equals("Search")) {
-                //TODO searching(head);
+                //TODO search function;
             } else if(input.equals("view") || input.equals("View")) {
                 printing(y7c2);
 
-            }else if(input.equals("score") || input.equals("Score")) {
+            } else if(input.equals("score") || input.equals("Score")) {
                 y7c2.setScores(br);
-            }else if(input.equals("grade") || input.equals("Grade")) {
+
+            } else if(input.equals("grade") || input.equals("Grade")) {
                 node.setGrade(y7c2);
 
-            }else if(input.equals("random") || input.equals("Random")) {
+            } else if(input.equals("random") || input.equals("Random")) {
                 y7c2.setRandomScores();
+
                 System.out.println(y7c2.toString());
-            } else if(input.equals("count") || input.equals("Count")) {
-                System.out.println("Class size:  " + y7c2.getSize());
+            } else if(input.equals("details") || input.equals("Details")) {
+                System.out.println("Class size:  " + y7c2.getCurrentSize());
+                System.out.println("Scores average:  " + y7c2.getClassScoreAverage());
 
             } else if(input.equals("add") || input.equals("Add")) {
                 System.out.println("Please type new students first name:");
                 String new_student_f = (br.readLine());
                 System.out.println("Please type new students last name:");
                 String new_student_s = (br.readLine());
-
                 y7c2.addStudent(new_student_f,new_student_s );
-            } else if(input.equals("exit")){
 
+            } else if(input.equals("exit")){
                 exit = true;
+
             } else {
                 System.out.println("Error please try again.");
             }
