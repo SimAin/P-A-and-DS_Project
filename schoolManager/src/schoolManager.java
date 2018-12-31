@@ -4,46 +4,20 @@ import java.io.InputStreamReader;
 
 public class schoolManager {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static scoreToGrade<Integer> gradeNode = scoreToGrade.setGrades(95,85,75,65,45,20);
 
     public static void main (String[] args) throws IOException {
 
         boolean exit = false;
 
-        scoreToGrade<Integer> nodeAA = new scoreToGrade<>(95,100, "A*");
-        scoreToGrade<Integer> nodeA = new scoreToGrade<>(85, 94, "A");
-        scoreToGrade<Integer> nodeB = new scoreToGrade<>(75, 84, "B");
-        scoreToGrade<Integer> nodeC = new scoreToGrade<>(65, 74, "C");
-        scoreToGrade<Integer> nodeD = new scoreToGrade<>(45, 64, "D");
-        scoreToGrade<Integer> nodeF = new scoreToGrade<>(20, 44, "F");
-        scoreToGrade<Integer> nodeU = new scoreToGrade<>(0,  19,"U");
 
-        nodeC.setLeftChild(nodeA);
-        nodeC.setRightChild(nodeF);
-        nodeA.setLeftChild(nodeAA);
-        nodeA.setRightChild(nodeB);
-        nodeF.setLeftChild(nodeD);
-        nodeF.setRightChild(nodeU);
-
-        scoreToGrade<Integer> node = nodeC;
-
-        student[] studentList = new student[35];
+        student[] studentList;
         studentList = dataLists.getDataList1(35);
         classOfStudents y7c2 = new classOfStudents( new staffMember("Mrs Simpson", "", "Year7 Teacher", null), 35, 24);
         y7c2.setStudents(studentList);
 
-
         while (!exit) {
-            System.out.println();
-            System.out.println("The students listed above have been imported");
-            System.out.println("Please type 'view' to see students:");
-            System.out.println("Please type 'sort' to sort them by surname:");
-            System.out.println("Please type 'score' to run through the students and apply scores:");
-            System.out.println("To skip and apply random scores for testing, please type 'random':");
-            System.out.println("To search for a student type 'search':");
-            System.out.println("To set grades please type 'grade':");
-            System.out.println("To get class size and score average please type 'details':");
-            System.out.println("To add a new student please type 'add' and to delete a student please type 'delete'"); //TODO: add delete
-            System.out.println("Please type 'exit' to end:");
+            menuText();
             String input = (br.readLine());
 
             if(input.equals("sort") || input.equals("sort")) {
@@ -62,7 +36,7 @@ public class schoolManager {
                 y7c2.setScores(br);
 
             } else if(input.equals("grade") || input.equals("Grade")) {
-                node.setGrade(y7c2);
+                gradeOptionsManager(y7c2);
 
             } else if(input.equals("random") || input.equals("Random")) {
                 y7c2.setRandomScores();
@@ -86,21 +60,49 @@ public class schoolManager {
                 System.out.println("Error please try again.");
             }
         }
+    }
 
-        /*
-        node.showTree();
-
+    //Block of console text to give user options
+    private static void menuText() {
         System.out.println();
-        node.setGrade(y7c2);
-        System.out.println(y7c2.getTeacher().getForename() + " " + y7c2.getTeacher().getSurname());
-        System.out.println(y7c2.gradesToString());
-        System.out.println(y7c2.getClassScoreAverage());
+        System.out.println("The students listed above have been imported");
+        System.out.println("Please type 'view' to see students:");
+        System.out.println("Please type 'sort' to sort them by surname:");
+        System.out.println("Please type 'score' to run through the students and apply scores:");
+        System.out.println("To skip and apply random scores for testing, please type 'random':");
+        System.out.println("To search for a student type 'search':");
+        System.out.println("To manage grades, set grades or change boundaries (initially set to default) please type 'grade':");
+        System.out.println("To get class size and score average please type 'details':");
+        System.out.println("To add a new student please type 'add' and to delete a student please type 'delete'"); //TODO: add delete
+        System.out.println("Please type 'exit' to end:");
+    }
 
-        System.out.println();
-        node.setGrade(y8c1);
-        System.out.println(y8c1.getTeacher().getForename() + " " + y8c1.getTeacher().getSurname());
-        System.out.println(y8c1.gradesToString());
-        System.out.println(y8c1.getClassScoreAverage());*/
+    //Function to manage the options for gradings
+    private static void gradeOptionsManager(classOfStudents theClass) throws IOException {
+        System.out.println("To see grade structure please type 'display' :");
+        System.out.println("To set grades for students please type 'grade' :");
+        System.out.println("To change grade boundaries please type 'settings' :");
+
+        String option = (br.readLine());
+        if(option.equals("grade") || option.equals("Grade")){
+            gradeNode.setGrade(theClass);
+        } else if (option.equals("display") || option.equals("Display")){
+            gradeNode.showTree();
+        } else if (option.equals("settings") || option.equals("Settings")) {
+            System.out.println("Type 'default' to set to standard boundaries or 'custom' to set custom options:");
+            String grade_choice = (br.readLine());
+            if(grade_choice.equals("default") || grade_choice.equals("Default")) {
+                gradeNode = scoreToGrade.setGrades(95,85,75,65,45,20);
+                gradeNode.showTree();
+            } else if (grade_choice.equals("custom") || grade_choice.equals("Custom")) {
+                gradeNode = scoreToGrade.customGrades(br);
+                gradeNode.showTree();
+            } else {
+                System.out.println("Error please try again.");
+            }
+        } else {
+            System.out.println("Error please try again.");
+        }
     }
 
     //Function to manage the options for searching for a student
@@ -128,7 +130,7 @@ public class schoolManager {
     }
 
     //Function for managing output based on search results
-    public static void searchResults (int result, String search, classOfStudents theClass) {
+    private static void searchResults (int result, String search, classOfStudents theClass) {
         if(result == -1) {
             System.out.println("The search for " + search + " did not return any results, please try again.");
         } else {
@@ -137,7 +139,7 @@ public class schoolManager {
     }
 
     //Method to print students
-    public static void printing(classOfStudents head){
+    private static void printing(classOfStudents head){
         System.out.println("Class:  ");
         System.out.println(head.toString());
         System.out.println();
