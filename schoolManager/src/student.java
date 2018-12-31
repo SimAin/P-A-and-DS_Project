@@ -1,70 +1,58 @@
 public class student {
-    private student next;
-    private student previous;
-
     private String forename;
     private String surname;
 
     private int examScore = 0;
     private String examGrade;
 
-    public student(student next, String forename, String surname) {
-        this.next = next;
+    //Constructor for student class
+    public student(String forename, String surname) {
         this.forename = forename;
         this.surname = surname;
     }
 
+    //Set details of a student
     public void set(student newStudent) {
-        this.setNext(newStudent.next);
-        this.setPrevious(newStudent.previous);
         this.setForename(newStudent.forename);
         this.setSurname(newStudent.surname);
     }
 
-    public student getNext() {
-        return next;
-    }
-
-    public void setNext(student next) {
-        this.next = next;
-    }
-
-    public student getPrevious() {
-        return previous;
-    }
-
-    public void setPrevious(student previous) {
-        this.previous = previous;
-    }
-
+    //Get forename of student
     public String getForename() {
         return forename;
     }
 
+    //Set forename of student
     public void setForename(String forename) {
         this.forename = forename;
     }
 
+    //Get surname of student
     public String getSurname() {
         return surname;
     }
 
-    public void setexamScore(int examScore) {
+    //Set exam score of student
+    public void setExamScore(int examScore) {
         this.examScore = examScore;
     }
 
-    public int getexamScore() {
+    //Get exam score of student
+    public int getExamScore() {
         return examScore;
     }
 
+    //Set surname of student
     public void setSurname(String surname) {
         this.surname = surname;
     }
 
+    //Get exam grade of student
     public String getExamGrade() {
         return examGrade;
     }
 
+    //Set exam score of student
     public void setExamGrade(String examGrade) {
         this.examGrade = examGrade;
     }

@@ -1,20 +1,35 @@
 import java.util.Random;
+import java.io.BufferedReader;
+import java.io.IOException;
+
 public class classOfStudents {
     private staffMember teacher;
-    private String className;
 
-    private student head;
+    private student[] students;
+    private int currentSize;
+    private int maximumSize;
 
-    public classOfStudents(student head, staffMember teacher, String className) {
-        this.head = head;
+    public classOfStudents( staffMember teacher, int maximumSize, int currentSize) {
+        this.students = new student[maximumSize];
+        this.maximumSize = maximumSize;
+        this.currentSize = currentSize;
+
         this.teacher = teacher;
-        this.className = className;
     }
 
     public classOfStudents() {
-        this.head = null;
+        this.students = null;
         this.teacher = null;
-        this.className = null;
+    }
+
+    //Returns array of students
+    public student[] getStudents() {
+        return students;
+    }
+
+    //Sets array of students
+    public void setStudents(student[] students) {
+        this.students = students;
     }
 
     public staffMember getTeacher() {
@@ -25,194 +40,133 @@ public class classOfStudents {
         this.teacher = teacher;
     }
 
-    public String getClassName() {
-        return className;
-    }
-
-    public void setClassName(String className) {
-        this.className = className;
-    }
-
-    public void addStudent(String forname, String surname) {
-
-        student current = this.head;
-
-        while (current.getNext () != null) {
-            current = current.getNext ();
+    //Adds Student to class
+    public void addStudent(String forename, String surname) {
+        if (currentSize != maximumSize){
+            students[currentSize + 1] = new student(forename, surname);
+            currentSize = currentSize + 1;
+        } else {
+            System.out.println("Class is currently at full capacity");
         }
-
-        current.setNext (new student (null, forname, surname));
-
     }
 
-    public void sortStudentsBySurname() {
-        int initialCount = getSize();
-        boolean madeSwap;
-        student tempArray = head;
-        int siz = this.getSize();
-        //If collection > 0
-        if (siz != 0) {
-            //Loop through list of students until no swap is made
+    //Incision sort algorithm for students by students surname
+    public student[] sortStudentsBySurname () {
+
+        int t = 0;
+        student[] tempArray = students;
+        if(tempArray.length != 0) {
             do {
-                //Set trigger to false for swap
-                madeSwap = false;
-                //Loop through each student to check for a swap
-                for (int i = 0; i < siz ; i = i + 1) {
-                    //If next student exists
-                    if (tempArray != null) {
-                        //If there is an item to swap it with
-                        if (tempArray.getNext() != null) {
-                            //Compare items to see if they are the right way round.
-                            //If not enter statement
-                            if (tempArray.getSurname().compareTo(tempArray.getNext().getSurname()) > 0) {
-                                //Swap items
-                                swap(tempArray);
-                                madeSwap = true;
-                            } else if ((tempArray.getSurname().compareTo(tempArray.getNext().getSurname()) == 0) && (tempArray.getSurname().compareTo(tempArray.getNext().getSurname()) > 0)) {
-                                //Swap items
-                                swap(tempArray);
-                                madeSwap = true;
-                            }
-                        }
-                    }
-                    //Set the current head to the next item, unless this is last item
-                    if (tempArray.getNext() != null) {
-                        tempArray = tempArray.getNext();
-                    } else {
-                        tempArray = head;
-                    }
-                }
-                //Following loop, reset head of list to start.
-                tempArray = resetHead(tempArray);
-
-            } while (madeSwap);
+                doInsert (tempArray, t);
+                t++;
+            } while (t != currentSize);
         }
-        //Reset head to temp
-        this.head = tempArray;
-    }
-
-    private student swap(student tempArray) {
-        student temp = tempArray;
-        student prev = tempArray.getPrevious();
-        student next = tempArray.getNext();
-        student nextPlusOne = tempArray.getNext().getNext();
-
-        if(prev == null) {  //If first and second items in list
-            next.setPrevious(null);
-            temp.setNext(nextPlusOne);
-            nextPlusOne.setPrevious(temp);
-
-        } else if(nextPlusOne == null) {    //If last and second to last items in list
-            next.setPrevious(prev);
-            temp.setNext(null);
-            prev.setNext(next);
-        } else {    //All other swaps
-            next.setPrevious(prev);
-            temp.setNext(nextPlusOne);
-            prev.setNext(next);
-            nextPlusOne.setPrevious(temp);
-        }
-        //Generic swaps
-        next.setNext(temp);
-        temp.setPrevious(next);
 
         return tempArray;
     }
 
-    public student getHead() {
-        return head;
-    }
-
-    public void setHead(student head) {
-        this.head = head;
-    }
-
-    public int getSize() {
-        int size = 0;
-        if (head != null) {
-            size++;
-            student current = head;
-            while (current.getNext() != null) {
-                size++;
-                current = current.getNext();
+    //Insert function for incision sort
+    public void doInsert(student[] temp_students, int counter) {
+        student mover = temp_students[counter];
+        for (int i = 0; i < counter; i++) {
+            if(temp_students[i].getSurname().compareTo(mover.getSurname()) > 0) {
+                swap(temp_students, i, counter);
             }
         }
-        return size;
     }
 
+    //Swaps students in list, used in insert method
+    private student[] swap(student[] tempArray, int i1, int i2) {
+        student temp;
+
+        temp = tempArray[i1];
+        tempArray[i1] = tempArray[i2];
+        tempArray[i2] = temp;
+
+        return tempArray;
+    }
+
+    //Binary search of students
+    public int binarySearch (int search, String toFind) {
+        student[] current = sortStudentsBySurname();
+
+        int left = 0;
+        int right = getCurrentSize() - 1;
+
+        while (left <= right) {
+            // compute index of middle-ish number
+            int index = (left + right)/2;
+
+            String name = "";
+
+            if (search == 0) {
+                name = current[index].getSurname() + current[index].getForename();
+            } else if (search == 1) {
+                name = current[index].getSurname();
+            } else if (search == 2) {
+                name = current[index].getForename();
+            }
+
+            // If found, return index of array
+            if (name.compareTo(toFind) == 0) {
+                return index;
+                // If its greater than 0 choose the LEFT part
+            } else if (name.compareTo(toFind) > 0) {
+                right = index-1;
+                //Else it must choose the RIGHT part
+            } else {
+                left = index+1;
+            }
+        }
+
+        // The search has not been found
+        return -1;
+    }
+
+    //Gets size of class
+    public int getCurrentSize() {
+        return currentSize;
+    }
+
+    //Returns an average of all students grades for teachers
     public int getClassScoreAverage() {
         int totalScore = 0;
-        if (head != null) {
-            student current = head;
-            while (current.getNext() != null) {
-                if(current.getexamScore() != 0){
-                    totalScore = totalScore + current.getexamScore();
+        if (currentSize != 0) {
+            for (int i = 0; i < currentSize; i++) {
+                if(students[i].getExamScore() != 0){
+                    totalScore = totalScore + students[i].getExamScore();
                 }
-                current = current.getNext();
             }
         }
-        return totalScore / this.getSize();
+        return totalScore / currentSize;
     }
 
+    //Returns a string with all students, their scores and grades
     @Override
     public String toString() {
-        student current = head;
-        String result = "\n{" + current.getSurname() + ", " + current.getForename() + "}, ";
-
-        while (current.getNext() != null) {
-            result = result + "\n{" + current.getNext().getSurname() + ", " + current.getNext().getForename() + "}, ";
-            current = current.getNext();
+        String result = "";
+        for (int i = 0; i < currentSize; i++) {
+            result = result + "\n{"  + students[i].getSurname() + ", " + students[i].getForename() + ", " + students[i].getExamScore() + ", " + students[i].getExamGrade() + "}, ";
         }
+
         return result;
     }
 
-    public String scoresToString() {
-        student current = head;
-        String result = "\n{" + current.getSurname() + ", " + current.getForename() + ", " + current.getexamScore() +"}, ";
+    //Iterates through class asking teacher to set scores for students
+    public void setScores(BufferedReader br) throws IOException {
 
-        while (current.getNext() != null) {
-            result = result + "\n{" + current.getNext().getSurname() + ", " + current.getNext().getForename() + ", " + current.getexamScore() + "}, ";
-            current = current.getNext();
+        for (int i = 0; i < currentSize; i++) {
+            System.out.println("Please type score for: " + students[i].getForename() + " " + students[i].getSurname());
+            int score = Integer.parseInt((br.readLine()));
+            students[i].setExamScore(score);
         }
-        return result;
     }
 
-    public String gradesToString() {
-        student current = head;
-        String result = "\n{" + current.getSurname() + ", " + current.getForename() + ", " + current.getexamScore() + ", " + current.getExamGrade() +"}, ";
-
-        while (current.getNext() != null) {
-            result = result + "\n{" + current.getNext().getSurname() + ", " + current.getNext().getForename() + ", " + current.getexamScore() + ", "+ current.getExamGrade() + "}, ";
-            current = current.getNext();
-        }
-        return result;
-    }
-
-    public student resetHead(student tempArray){
-        boolean foundStart = false;
-        while (!foundStart) {
-            if (tempArray.getPrevious() == null) {
-                foundStart = true;
-            } else {
-                tempArray = tempArray.getPrevious();
-            }
-        }
-        return tempArray;
-    }
-
-    //TODO: Make a teacher method for setting scores.
-    //Test method to set random scores as examples
+    //TEST METHOD - To set random scores as examples
     public void setRandomScores(){
         Random rand = new Random();
-        student current = head;
-        while (current.getNext() != null) {
-            current.setexamScore(rand.nextInt(80) + 20);
-            current = current.getNext();
-        }
-
-        while (current.getPrevious() != null) {
-            current = current.getPrevious();
+        for (int i = 0; i < currentSize; i++) {
+            students[i].setExamScore(rand.nextInt(80) + 20);
         }
     }
-
 }

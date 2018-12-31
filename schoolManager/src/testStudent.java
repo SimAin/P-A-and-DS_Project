@@ -16,46 +16,46 @@ public class testStudent {
     // Main method to run tests.
     public static void main (String[] args) {
 
-        student album = dataLists.getDataList1();
-        classOfStudents studentList = new classOfStudents();
-        studentList.setHead(album);
+        classOfStudents schoolClass = new classOfStudents();
+        schoolClass.setStudents(dataLists.getDataList1(35));
 
         //Test get album and get artist
-        checkStringValues(studentList.getHead().getForename(),"Robert");
-        checkStringValues(studentList.getHead().getSurname(),"Lynn");
+        checkStringValues(schoolClass.getStudents()[1].getForename(),"Robert");
+        checkStringValues(schoolClass.getStudents()[1].getSurname(),"Lynn");
 
         //Test get next via get album and get artist
-        checkStringValues(studentList.getHead().getNext().getForename(),"Daisy");
-        checkStringValues(studentList.getHead().getNext().getSurname(),"Flowers");
+        checkStringValues(schoolClass.getStudents()[2].getForename(),"Daisy");
+        checkStringValues(schoolClass.getStudents()[2].getSurname(),"Flowers");
 
+        //TODO: Update methods for array
         //using set head method
-        studentList.setHead(studentList.getHead().getNext().getNext());
+        //schoolClass.getStudents()[1].set(schoolClass.getHead().getNext().getNext());
 
         //Testing set head was successful
-        checkStringValues(studentList.getHead().getForename(),"Gerrie");
-        checkStringValues(studentList.getHead().getSurname(),"Bennett");
+        //checkStringValues(schoolClass.getHead().getForename(),"Gerrie");
+        //checkStringValues(schoolClass.getHead().getSurname(),"Bennett");
 
         //using set previous method
-        studentList.getHead().setPrevious(new student(studentList.getHead(),"Mike", "Crew"));
+        //schoolClass.getHead().setPrevious(new student(schoolClass.getHead(),"Mike", "Crew"));
 
         //Testing set previous was successful via the get previous
-        checkStringValues(studentList.getHead().getPrevious().getForename(),"Mike");
-        checkStringValues(studentList.getHead().getPrevious().getSurname(),"Crew");
+        //checkStringValues(schoolClass.getHead().getPrevious().getForename(),"Mike");
+        //checkStringValues(schoolClass.getHead().getPrevious().getSurname(),"Crew");
 
         //using set methods
-        studentList.getHead().setForename("John");
-        studentList.getHead().setSurname("Barns");//(albumList.getHead().getNext().getNext());
+        //schoolClass.getHead().setForename("John");
+        //schoolClass.getHead().setSurname("Barns");//(albumList.getHead().getNext().getNext());
 
         //Testing set was successful
-        checkStringValues(studentList.getHead().getForename(),"John");
-        checkStringValues(studentList.getHead().getSurname(),"Barns");
+        //checkStringValues(schoolClass.getHead().getForename(),"John");
+        //checkStringValues(schoolClass.getHead().getSurname(),"Barns");
 
         //using set methods
-        studentList.getHead().set(new student(studentList.getHead().getNext(), "Rose", "Timpson"));
+        //schoolClass.getHead().set(new student(schoolClass.getHead().getNext(), "Rose", "Timpson"));
 
         //Testing set was successful
-        checkStringValues(studentList.getHead().getForename(),"Rose");
-        checkStringValues(studentList.getHead().getSurname(),"Timpson");
+        //checkStringValues(schoolClass.getHead().getForename(),"Rose");
+        //checkStringValues(schoolClass.getHead().getSurname(),"Timpson");
 
         if(!errorTrigger){
             System.out.println("Tests complete: All tests passed, No errors found");

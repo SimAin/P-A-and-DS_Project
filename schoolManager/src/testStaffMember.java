@@ -34,12 +34,10 @@ public class testStaffMember {
         staff.setForename("Rodge");
         staff.setSurname("Peters");
         staff.setJobTitle("Cleaner");
-        staff.setSuperior(new staffMember("Lucy", "Cole", "Headteacher", null));
 
         checkStringValues(staff.getForename(), "Rodge");
         checkStringValues(staff.getSurname(), "Peters");
         checkStringValues(staff.getJobTitle(), "Cleaner");
-        checkStaffValues(staff.getSuperior(), new staffMember("Lucy", "Cole", "Headteacher", null));
 
 
     }

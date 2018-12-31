@@ -2,18 +2,6 @@ public class testAlbum {
 
     public static boolean errorTrigger = false;
 
-    public static boolean checkStringValues(String data, String expected) {
-        if(data.equals(expected)) {
-            return false;
-        } else {
-            errorTrigger = true;
-            System.out.println("expected: " + expected);
-            System.out.println("actual: " + data);
-            System.out.println(" ");
-        }
-        return true;
-    }
-
     // Main method to run tests.
     public static void main (String[] args) {
 
@@ -61,5 +49,17 @@ public class testAlbum {
         if(!errorTrigger){
             System.out.println("Tests complete: All tests passed, No errors found");
         }
+    }
+
+    public static boolean checkStringValues(String data, String expected) {
+        if(data.equals(expected)) {
+            return false;
+        } else {
+            errorTrigger = true;
+            System.out.println("expected: " + expected);
+            System.out.println("actual: " + data);
+            System.out.println(" ");
+        }
+        return true;
     }
 }

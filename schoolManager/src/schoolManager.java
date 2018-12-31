@@ -1,52 +1,147 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 public class schoolManager {
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static scoreToGrade<Integer> gradeNode = scoreToGrade.setGrades(95,85,75,65,45,20);
 
-    public static void main (String[] args) {
+    public static void main (String[] args) throws IOException {
 
-        staffMember headTeacher = new staffMember("Gorden", "Newport", "Headteacher", null);
+        boolean exit = false;
 
-        student topStudent = dataLists.getDataList1();
-        classOfStudents y7c2 = new classOfStudents(topStudent, new staffMember("Mrs Simpson", "", "Year7 Teacher", headTeacher), "y7c2");
 
-        System.out.println(y7c2.toString());
-        y7c2.setRandomScores();
-        y7c2.sortStudentsBySurname();
+        student[] studentList;
+        studentList = dataLists.getDataList1(35);
+        classOfStudents y7c2 = new classOfStudents( new staffMember("Mrs Simpson", "", "Year7 Teacher", null), 35, 24);
+        y7c2.setStudents(studentList);
 
-        student topStudent2 = dataLists.getDataList1();
-        classOfStudents y8c1 = new classOfStudents(topStudent2, new staffMember("Mr Rodgers", "", "Year8 Teacher", headTeacher), "y8c1");
+        while (!exit) {
+            menuText();
+            String input = (br.readLine());
 
-        System.out.println(y7c2.toString());
-        y8c1.setRandomScores();
-        y8c1.sortStudentsBySurname();
+            if(input.equals("sort") || input.equals("sort")) {
+                y7c2.sortStudentsBySurname();
+                printing(y7c2);
 
-        scoreToGrade<Integer> nodeAA = new scoreToGrade<>(95,100, "A*");
-        scoreToGrade<Integer> nodeA = new scoreToGrade<>(85, 94, "A");
-        scoreToGrade<Integer> nodeB = new scoreToGrade<>(75, 84, "B");
-        scoreToGrade<Integer> nodeC = new scoreToGrade<>(65, 74, "C");
-        scoreToGrade<Integer> nodeD = new scoreToGrade<>(45, 64, "D");
-        scoreToGrade<Integer> nodeF = new scoreToGrade<>(20, 44, "F");
-        scoreToGrade<Integer> nodeU = new scoreToGrade<>(0,  19,"U");
+            } else if(input.equals("search") || input.equals("Search")) {
+                System.out.println("To search a full name type 'full', to search a surname, type 'surname', to search a forename, type 'forename': ");
+                String searchType = (br.readLine());
+                searchOptionsManager(searchType, y7c2);
 
-        nodeC.setLeftChild(nodeA);
-        nodeC.setRightChild(nodeF);
-        nodeA.setLeftChild(nodeAA);
-        nodeA.setRightChild(nodeB);
-        nodeF.setLeftChild(nodeD);
-        nodeF.setRightChild(nodeU);
+            } else if(input.equals("view") || input.equals("View")) {
+                printing(y7c2);
 
-        scoreToGrade<Integer> node = nodeC;
+            } else if(input.equals("score") || input.equals("Score")) {
+                y7c2.setScores(br);
 
-        node.showTree();
+            } else if(input.equals("grade") || input.equals("Grade")) {
+                gradeOptionsManager(y7c2);
 
+            } else if(input.equals("random") || input.equals("Random")) {
+                y7c2.setRandomScores();
+
+                System.out.println(y7c2.toString());
+            } else if(input.equals("details") || input.equals("Details")) {
+                System.out.println("Class size:  " + y7c2.getCurrentSize());
+                System.out.println("Scores average:  " + y7c2.getClassScoreAverage());
+
+            } else if(input.equals("add") || input.equals("Add")) {
+                System.out.println("Please type new students first name:");
+                String new_student_f = (br.readLine());
+                System.out.println("Please type new students last name:");
+                String new_student_s = (br.readLine());
+                y7c2.addStudent(new_student_f,new_student_s );
+
+            } else if(input.equals("exit")){
+                exit = true;
+
+            } else {
+                System.out.println("Error please try again.");
+            }
+        }
+    }
+
+    //Block of console text to give user options
+    private static void menuText() {
         System.out.println();
-        node.setGrade(y7c2);
-        System.out.println(y7c2.getTeacher().getForename() + " " + y7c2.getTeacher().getSurname());
-        System.out.println(y7c2.gradesToString());
-        System.out.println(y7c2.getClassScoreAverage());
+        System.out.println("The students listed above have been imported");
+        System.out.println("Please type 'view' to see students:");
+        System.out.println("Please type 'sort' to sort them by surname:");
+        System.out.println("Please type 'score' to run through the students and apply scores:");
+        System.out.println("To skip and apply random scores for testing, please type 'random':");
+        System.out.println("To search for a student type 'search':");
+        System.out.println("To manage grades, set grades or change boundaries (initially set to default) please type 'grade':");
+        System.out.println("To get class size and score average please type 'details':");
+        System.out.println("To add a new student please type 'add' and to delete a student please type 'delete'"); //TODO: add delete
+        System.out.println("Please type 'exit' to end:");
+    }
 
+    //Function to manage the options for gradings
+    private static void gradeOptionsManager(classOfStudents theClass) throws IOException {
+        System.out.println("To see grade structure please type 'display' :");
+        System.out.println("To set grades for students please type 'grade' :");
+        System.out.println("To change grade boundaries please type 'settings' :");
+
+        String option = (br.readLine());
+        if(option.equals("grade") || option.equals("Grade")){
+            gradeNode.setGrade(theClass);
+        } else if (option.equals("display") || option.equals("Display")){
+            gradeNode.showTree();
+        } else if (option.equals("settings") || option.equals("Settings")) {
+            System.out.println("Type 'default' to set to standard boundaries or 'custom' to set custom options:");
+            String grade_choice = (br.readLine());
+            if(grade_choice.equals("default") || grade_choice.equals("Default")) {
+                gradeNode = scoreToGrade.setGrades(95,85,75,65,45,20);
+                gradeNode.showTree();
+            } else if (grade_choice.equals("custom") || grade_choice.equals("Custom")) {
+                gradeNode = scoreToGrade.customGrades(br);
+                gradeNode.showTree();
+            } else {
+                System.out.println("Error please try again.");
+            }
+        } else {
+            System.out.println("Error please try again.");
+        }
+    }
+
+    //Function to manage the options for searching for a student
+    private static void searchOptionsManager(String searchType, classOfStudents theClass) throws IOException {
+        if(searchType.equals("full") || searchType.equals("Full")) {
+            System.out.println("Please type the Surname of the student you wish to search for: ");
+            String student_sname = (br.readLine());
+            System.out.println("Please type the Forename of the student you wish to search for: ");
+            String student_fname = (br.readLine());
+            int result = theClass.binarySearch(0, student_sname + student_fname);
+            searchResults(result, student_sname + ", " + student_fname, theClass);
+        } else if(searchType.equals("surname") || searchType.equals("Surname")) {
+            System.out.println("Please type the Surname of the student you wish to search for: ");
+            String student_name = (br.readLine());
+            int result = theClass.binarySearch(1, student_name);
+            searchResults(result, student_name, theClass);
+        } else if(searchType.equals("forename") || searchType.equals("Forename")) {
+            System.out.println("Please type the Forename of the student you wish to search for: ");
+            String student_name = (br.readLine());
+            int result = theClass.binarySearch(2, student_name);
+            searchResults(result, student_name, theClass);
+        } else {
+            System.out.println("Error please try again: ");
+        }
+    }
+
+    //Function for managing output based on search results
+    private static void searchResults (int result, String search, classOfStudents theClass) {
+        if(result == -1) {
+            System.out.println("The search for " + search + " did not return any results, please try again.");
+        } else {
+            System.out.println("The search for " + search + " returned the student: " + theClass.getStudents()[result].getSurname() + ", " + theClass.getStudents()[result].getForename());
+        }
+    }
+
+    //Method to print students
+    private static void printing(classOfStudents head){
+        System.out.println("Class:  ");
+        System.out.println(head.toString());
         System.out.println();
-        node.setGrade(y8c1);
-        System.out.println(y8c1.getTeacher().getForename() + " " + y8c1.getTeacher().getSurname());
-        System.out.println(y8c1.gradesToString());
-        System.out.println(y8c1.getClassScoreAverage());
     }
 }

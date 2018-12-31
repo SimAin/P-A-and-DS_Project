@@ -1,4 +1,5 @@
 public class mediaList {
+    //Test data for running application
     public static album getMediaList() {
         album metSt = new album (null, "Metallica", "St Anger");
         album metSo = new album (metSt, "Metallica", "Some Kind Of Monster");
@@ -24,7 +25,6 @@ public class mediaList {
         album ftPs = new album (ftEn, "Frank Turner", "Positive Songs for Negative People");
         album gdAm = new album (ftPs, "Green Day", "American Idiot");
         album amWc = new album (gdAm, "Against Me", "White Crosses / Black Crosses");
-
 
         metSt.setPrevious(metSo);
         metSo.setPrevious(metD);

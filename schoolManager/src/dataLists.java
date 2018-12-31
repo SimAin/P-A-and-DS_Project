@@ -1,109 +1,34 @@
 public class dataLists {
-    public static student getDataList1() {
-        student rs = new student (null, "Rodger", "Smith");
-        student lw = new student (rs, "Lucy", "Weaver");
-        student dw = new student (lw, "Dave", "White");
-        student pp = new student (dw, "Percy", "Parker");
-        student bg = new student (pp, "Beth", "Glasper");
-        student ab = new student (bg, "Annie", "Blaine");
-        student tt = new student (ab, "Theo", "Thorn");
-        student bs = new student(tt, "Bruce", "Springer");
-        student aa = new student(bs, "Alexa", "Allen");
-        student jt = new student(aa, "John", "Thompson");
-        student bcO = new student(jt, "Zac", "Johnson");
-        student jr = new student(bcO, "Janice", "Robertson");
-        student php = new student(jr, "Phill", "Piper");
-        student sr = new student(php, "Steph", "Roe");
-        student ra = new student(sr, "Ryan", "Auger");
-        student sm = new student(ra, "Sam", "McManus");
-        student bc = new student(sm, "Ben", "Carr");
-        student el = new student (bc, "Eva", "Little");
-        student ls = new student (el, "Luke", "Skywalker");
-        student gj = new student (ls, "Gavin", "Jenkins");
-        student fp = new student (gj, "Franky", "Potter");
-        student gb = new student (fp, "Gerrie", "Bennett");
-        student df = new student (gb, "Daisy", "Flowers");
-        student rl = new student (df, "Robert", "Lynn");
 
+    //A random data set for testing the system
+    public static student[] getDataList1(int size) {
+        student[] students = new student[size];
 
-        rs.setPrevious(lw);
-        lw.setPrevious(dw);
-        dw.setPrevious(pp);
-        pp.setPrevious(bg);
-        bg.setPrevious(ab);
-        ab.setPrevious(tt);
-        tt.setPrevious(bs);
-        bs.setPrevious(aa);
-        aa.setPrevious(jt);
-        jt.setPrevious(bcO);
-        bcO.setPrevious(jr);
-        jr.setPrevious(php);
-        php.setPrevious(sr);
-        sr.setPrevious(ra);
-        ra.setPrevious(sm);
-        sm.setPrevious(bc);
-        bc.setPrevious(el);
-        el.setPrevious(ls);
-        ls.setPrevious(gj);
-        gj.setPrevious(fp);
-        fp.setPrevious(gb);
-        gb.setPrevious(df);
-        df.setPrevious(rl);
-        rl.setPrevious(null);
-        return rl;
-    }
+        students[0] = new student ("Gerrie", "Bennett");
+        students[1] = new student ("Rodger", "Smith");
+        students[2] = new student ("Lucy", "Weaver");
+        students[3] = new student ("Dave", "White");
+        students[4] = new student ("Percy", "Parker");
+        students[5] = new student ("Beth", "Glasper");
+        students[6] = new student ( "Annie", "Blaine");
+        students[7] = new student ( "Theo", "Thorn");
+        students[8] = new student( "Bruce", "Springer");
+        students[9] = new student( "Alexa", "Allen");
+        students[10] = new student( "John", "Thompson");
+        students[11] = new student( "Zac", "Johnson");
+        students[12] = new student( "Janice", "Robertson");
+        students[13] = new student( "Phill", "Piper");
+        students[14] = new student( "Steph", "Roe");
+        students[15] = new student("Ryan", "Auger");
+        students[16] = new student( "Sam", "McManus");
+        students[17] = new student("Ben", "Carr");
+        students[18] = new student ( "Eva", "Little");
+        students[19] = new student ("Luke", "Skywalker");
+        students[20] = new student ("Gavin", "Jenkins");
+        students[21] = new student ("Franky", "Potter");
+        students[22] = new student ("Daisy", "Flowers");
+        students[23] = new student ("Robert", "Lynn");
 
-    public static student getDataList2() {
-        student rs = new student (null, "Fred", "Smithson");
-        student lw = new student (rs, "Dan", "Weaverson");
-        student dw = new student (lw, "Tom", "Whiteson");
-        student pp = new student (dw, "Sam", "Parkerson");
-        student bg = new student (pp, "Ben", "Glasperson");
-        student ab = new student (bg, "Ann", "Blaineson");
-        student tt = new student (ab, "Rose", "Thornson");
-        student bs = new student(tt, "Bruno", "Springerson");
-        student aa = new student(bs, "Alex", "Allenson");
-        student jt = new student(aa, "Joan", "Thompsonson");
-        student bcO = new student(jt, "Mo", "Johnson");
-        student jr = new student(bcO, "Jen", "Robertson");
-        student php = new student(jr, "Phebe", "Piperson");
-        student sr = new student(php, "Stan", "Roeson");
-        student ra = new student(sr, "Reo", "Augerson");
-        student sm = new student(ra, "Sonnie", "McManusson");
-        student bc = new student(sm, "Bettie", "Carrson");
-        student el = new student (bc, "Evan", "Littleson");
-        student ls = new student (el, "Lottie", "Skywalkerson");
-        student gj = new student (ls, "Genia", "Jenkinsson");
-        student fp = new student (gj, "Frank", "Potterson");
-        student gb = new student (fp, "Gert", "Bennettson");
-        student df = new student (gb, "Donnie", "Flowerson");
-        student rl = new student (df, "Rosie", "Lynnson");
-
-
-        rs.setPrevious(lw);
-        lw.setPrevious(dw);
-        dw.setPrevious(pp);
-        pp.setPrevious(bg);
-        bg.setPrevious(ab);
-        ab.setPrevious(tt);
-        tt.setPrevious(bs);
-        bs.setPrevious(aa);
-        aa.setPrevious(jt);
-        jt.setPrevious(bcO);
-        bcO.setPrevious(jr);
-        jr.setPrevious(php);
-        php.setPrevious(sr);
-        sr.setPrevious(ra);
-        ra.setPrevious(sm);
-        sm.setPrevious(bc);
-        bc.setPrevious(el);
-        el.setPrevious(ls);
-        ls.setPrevious(gj);
-        gj.setPrevious(fp);
-        fp.setPrevious(gb);
-        gb.setPrevious(df);
-        df.setPrevious(rl);
-        rl.setPrevious(null);
-        return rl;
+        return students;
     }
 }
