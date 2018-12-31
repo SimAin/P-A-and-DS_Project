@@ -47,8 +47,7 @@ public class schoolManager {
             String input = (br.readLine());
 
             if(input.equals("sort") || input.equals("sort")) {
-                //TODO: New sorting function
-                //y7c2.sortStudentsBySurname();
+                y7c2.sortStudentsBySurname();
                 printing(y7c2);
 
             } else if(input.equals("search") || input.equals("Search")) {
