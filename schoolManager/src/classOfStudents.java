@@ -52,7 +52,6 @@ public class classOfStudents {
 
     //Incision sort algorithm for students by students surname
     public student[] sortStudentsBySurname () {
-
         int t = 0;
         student[] tempArray = students;
         if(tempArray.length != 0) {

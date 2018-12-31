@@ -8,6 +8,7 @@ public class scoreToGrade<T> {
     private scoreToGrade<T> leftChild;
     private scoreToGrade<T> rightChild;
 
+    //Constructor class for score to grade
     public scoreToGrade(int lscore, int hscore, String grade) {
         this.lowestScore = lscore;
         this.highestScore = hscore;
@@ -16,57 +17,22 @@ public class scoreToGrade<T> {
         this.rightChild = null;
     }
 
+    //Gets lower boundary of grade
     public int getLowestScore() {
         return lowestScore;
     }
 
-    public void setLowestScore(int topScore) {
-        this.lowestScore = topScore;
-    }
-
+    //Gets higher boundary of grade
     public int getHighestScore() {
         return highestScore;
     }
 
-    public void setHighestScore(int highestScore) {
-        this.highestScore = highestScore;
-    }
-
+    //Returns grade
     public String getGrade() {
         return grade;
     }
 
-    public void setGrade(String grade) {
-        this.grade = grade;
-    }
-
-    public scoreToGrade getLeftChild() {
-        return this.leftChild;
-    }
-    public void setLeftChild(scoreToGrade<T> leftChild) {
-        this.leftChild = leftChild;
-    }
-
-    public scoreToGrade getRightChild() {
-        return this.rightChild ;
-    }
-    public void setRightChild(scoreToGrade<T> rightChild) {
-        this.rightChild = rightChild;
-    }
-
-    public void showTree () {
-
-        //System.out.println ("Node: " + grade);   // Pre Order
-        if (leftChild != null) {
-            leftChild.showTree ();
-        }
-        System.out.println ("Grade: " + grade + " " + lowestScore + " - " + highestScore);   // Order
-        if (rightChild != null) {
-            rightChild.showTree ();
-        }
-        //System.out.println ("Node: " + grade);  // Post Order
-    }
-
+    //Set grade
     public void setGrade (classOfStudents schoolClass) {
 
         scoreToGrade current = this;
@@ -94,6 +60,41 @@ public class scoreToGrade<T> {
 
         }
 
+    }
+
+    //Returns left child of grade
+    public scoreToGrade getLeftChild() {
+        return this.leftChild;
+    }
+
+    //Sets left child of grade
+    public void setLeftChild(scoreToGrade<T> leftChild) {
+        this.leftChild = leftChild;
+    }
+
+    //Returns right child of grade
+    public scoreToGrade getRightChild() {
+        return this.rightChild ;
+    }
+
+    //Sets right child of Grade
+    public void setRightChild(scoreToGrade<T> rightChild) {
+        this.rightChild = rightChild;
+    }
+
+    //Displays node tree in grade order.
+    //(Other orders are commented out.)
+    public void showTree () {
+
+        //System.out.println ("Node: " + grade);   // Pre Order
+        if (leftChild != null) {
+            leftChild.showTree ();
+        }
+        System.out.println ("Grade: " + grade + " " + lowestScore + " - " + highestScore);   // Order
+        if (rightChild != null) {
+            rightChild.showTree ();
+        }
+        //System.out.println ("Node: " + grade);  // Post Order
     }
 
     //Sets node tree to given grade boundaries
