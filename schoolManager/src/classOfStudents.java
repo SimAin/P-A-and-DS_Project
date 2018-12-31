@@ -69,7 +69,6 @@ public class classOfStudents {
     public void doInsert(student[] temp_students, int counter) {
         student mover = temp_students[counter];
         for (int i = 0; i < counter; i++) {
-            System.out.println(temp_students[i].getSurname().compareTo(mover.getSurname()));
             if(temp_students[i].getSurname().compareTo(mover.getSurname()) > 0) {
                 swap(temp_students, i, counter);
             }
@@ -85,6 +84,43 @@ public class classOfStudents {
         tempArray[i2] = temp;
 
         return tempArray;
+    }
+
+    //Binary search of students
+    public int binarySearch (int search, String toFind) {
+        student[] current = sortStudentsBySurname();
+
+        int left = 0;
+        int right = getCurrentSize() - 1;
+
+        while (left <= right) {
+            // compute index of middle-ish number
+            int index = (left + right)/2;
+
+            String name = "";
+
+            if (search == 0) {
+                name = current[index].getSurname() + current[index].getForename();
+            } else if (search == 1) {
+                name = current[index].getSurname();
+            } else if (search == 2) {
+                name = current[index].getForename();
+            }
+
+            // If found, return index of array
+            if (name.compareTo(toFind) == 0) {
+                return index;
+                // If its greater than 0 choose the LEFT part
+            } else if (name.compareTo(toFind) > 0) {
+                right = index-1;
+                //Else it must choose the RIGHT part
+            } else {
+                left = index+1;
+            }
+        }
+
+        // The search has not been found
+        return -1;
     }
 
     //Gets size of class
@@ -133,30 +169,4 @@ public class classOfStudents {
             students[i].setExamScore(rand.nextInt(80) + 20);
         }
     }
-
-    //TODO:
-    /*public boolean binarySearch (int[] unNnumbers, String toFind) {
-        //Can use any sort, currently insertion
-
-        sortStudentsBySurname();
-        student current = head;
-        //int[] numbers = SortLibrary.insertionSort(unNnumbers);
-        int l = 0;
-        int r = getCurrentSize() - 1;
-
-        while (l <= r) {
-            int m = (l + r)/2;  // compute index of middle-ish number
-
-            if (toFind == numbers[m]) {       // SUCCESS! We found our number, so return its index
-                return true;
-            } else if (toFind < numbers[m]) { // choose the LEFT part
-                r = m-1;
-            } else { // (toFind > numbers[m])  choose the RIGHT part
-                l = m+1;
-            }
-        }
-
-        // we get here if the number has not been found
-        return false;
-    }*/
 }

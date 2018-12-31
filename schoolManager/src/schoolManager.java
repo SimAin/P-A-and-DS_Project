@@ -51,7 +51,10 @@ public class schoolManager {
                 printing(y7c2);
 
             } else if(input.equals("search") || input.equals("Search")) {
-                //TODO search function;
+                System.out.println("To search a full name type 'full', to search a surname, type 'surname', to search a forename, type 'forename': ");
+                String searchType = (br.readLine());
+                searchOptionsManager(searchType, y7c2);
+
             } else if(input.equals("view") || input.equals("View")) {
                 printing(y7c2);
 
@@ -100,6 +103,40 @@ public class schoolManager {
         System.out.println(y8c1.getClassScoreAverage());*/
     }
 
+    //Function to manage the options for searching for a student
+    private static void searchOptionsManager(String searchType, classOfStudents theClass) throws IOException {
+        if(searchType.equals("full") || searchType.equals("Full")) {
+            System.out.println("Please type the Surname of the student you wish to search for: ");
+            String student_sname = (br.readLine());
+            System.out.println("Please type the Forename of the student you wish to search for: ");
+            String student_fname = (br.readLine());
+            int result = theClass.binarySearch(0, student_sname + student_fname);
+            searchResults(result, student_sname + ", " + student_fname, theClass);
+        } else if(searchType.equals("surname") || searchType.equals("Surname")) {
+            System.out.println("Please type the Surname of the student you wish to search for: ");
+            String student_name = (br.readLine());
+            int result = theClass.binarySearch(1, student_name);
+            searchResults(result, student_name, theClass);
+        } else if(searchType.equals("forename") || searchType.equals("Forename")) {
+            System.out.println("Please type the Forename of the student you wish to search for: ");
+            String student_name = (br.readLine());
+            int result = theClass.binarySearch(2, student_name);
+            searchResults(result, student_name, theClass);
+        } else {
+            System.out.println("Error please try again: ");
+        }
+    }
+
+    //Function for managing output based on search results
+    public static void searchResults (int result, String search, classOfStudents theClass) {
+        if(result == -1) {
+            System.out.println("The search for " + search + " did not return any results, please try again.");
+        } else {
+            System.out.println("The search for " + search + " returned the student: " + theClass.getStudents()[result].getSurname() + ", " + theClass.getStudents()[result].getForename());
+        }
+    }
+
+    //Method to print students
     public static void printing(classOfStudents head){
         System.out.println("Class:  ");
         System.out.println(head.toString());
