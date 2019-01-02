@@ -12,7 +12,6 @@ public class schoolManager {
     public static void main (String[] args) throws IOException {
 
         boolean exit = false;
-
         student[] studentList;
         studentList = dataLists.getDataList1(35);
         classOfStudents currentClass = new classOfStudents( new staffMember("Mrs Simpson", "", "Year7 Teacher", null), 35, 23);
@@ -54,6 +53,16 @@ public class schoolManager {
                 System.out.println("Please type new students last name:");
                 String new_student_s = (br.readLine());
                 currentClass.addStudent(new_student_f,new_student_s );
+
+            } else if(input.equals("delete") || input.equals("Delete")) {
+                System.out.println("Firstly please search for the student to delete: ");
+                int index = searchOptionsManager("full", currentClass);
+                if(index == -1){
+                    System.out.println("Student not found, please try again.");
+                } else {
+                    currentClass.deleteStudent(index);
+                    System.out.println("Student successfully deleted.");
+                }
 
             } else if(input.equals("exit")){
                 exit = true;
@@ -108,22 +117,24 @@ public class schoolManager {
     }
 
     //Function to manage the options for searching for a student
-    private static void searchOptionsManager(String searchType, classOfStudents theClass) throws IOException {
+    private static int searchOptionsManager(String searchType, classOfStudents theClass) throws IOException {
+        int result = -1;
         if(searchType.equals("full") || searchType.equals("Full")) {
             System.out.println("Please type the Surname of the student you wish to search for: ");
             String student_sname = (br.readLine());
             System.out.println("Please type the Forename of the student you wish to search for: ");
             String student_fname = (br.readLine());
-            int result = theClass.binarySearch(0, student_sname + student_fname);
+            result = theClass.binarySearch(0, student_sname + student_fname);
             searchResults(result, student_sname + ", " + student_fname, theClass);
         } else if(searchType.equals("surname") || searchType.equals("Surname")) {
             System.out.println("Please type the Surname of the student you wish to search for: ");
             String student_name = (br.readLine());
-            int result = theClass.binarySearch(1, student_name);
+            result = theClass.binarySearch(1, student_name);
             searchResults(result, student_name, theClass);
         } else {
             System.out.println("Error please try again: ");
         }
+        return result;
     }
 
     //Function for managing output based on search results

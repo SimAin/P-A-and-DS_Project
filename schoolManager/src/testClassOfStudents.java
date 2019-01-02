@@ -121,6 +121,10 @@ public class testClassOfStudents {
         checkIntValues(new_class.binarySearch(0,"New_test_surnameNew_test_forename"), 12);
         checkIntValues(new_class.binarySearch(1,"New_test_surname"), 12);
 
+        //Test delete student
+        new_class.deleteStudent(5);
+        checkIntValues(new_class.getCurrentSize(), 23);
+
         //Check setting random scores
         new_class.setRandomScores();
         for (int i = 0; i < new_class.getCurrentSize(); i++) {

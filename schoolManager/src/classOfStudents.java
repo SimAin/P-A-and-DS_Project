@@ -52,6 +52,17 @@ public class classOfStudents {
         }
     }
 
+    //Delete Student from class
+    public void deleteStudent(int index) {
+
+        for (int i = index; i < currentSize-1; i++) {
+            students[i] = students[i+1];
+        }
+        students[currentSize].set(new student("", ""));
+        currentSize = currentSize-1;
+
+    }
+
     //Incision sort algorithm for students by students surname
     public student[] sortStudentsBySurname () {
         int t = 0;
