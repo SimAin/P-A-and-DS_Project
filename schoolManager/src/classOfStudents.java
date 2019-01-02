@@ -9,6 +9,7 @@ public class classOfStudents {
     private int currentSize;
     private int maximumSize;
 
+    //Constructor class for class of students
     public classOfStudents( staffMember teacher, int maximumSize, int currentSize) {
         this.students = new student[maximumSize];
         this.maximumSize = maximumSize;
@@ -17,6 +18,7 @@ public class classOfStudents {
         this.teacher = teacher;
     }
 
+    //Constructor class for empty class of students
     public classOfStudents() {
         this.students = null;
         this.teacher = null;
@@ -43,8 +45,8 @@ public class classOfStudents {
     //Adds Student to class
     public void addStudent(String forename, String surname) {
         if (currentSize != maximumSize){
-            students[currentSize + 1] = new student(forename, surname);
             currentSize = currentSize + 1;
+            students[currentSize] = new student(forename, surname);
         } else {
             System.out.println("Class is currently at full capacity");
         }
@@ -58,7 +60,7 @@ public class classOfStudents {
             do {
                 doInsert (tempArray, t);
                 t++;
-            } while (t != currentSize);
+            } while (t != currentSize + 1);
         }
 
         return tempArray;
@@ -86,6 +88,10 @@ public class classOfStudents {
     }
 
     //Binary search of students
+    //Search key:
+    // 0 == Full name
+    // 1 == Surname
+    // 2 == Forename
     public int binarySearch (int search, String toFind) {
         student[] current = sortStudentsBySurname();
 
@@ -144,7 +150,7 @@ public class classOfStudents {
     @Override
     public String toString() {
         String result = "";
-        for (int i = 0; i < currentSize; i++) {
+        for (int i = 0; i <= currentSize; i++) {
             result = result + "\n{"  + students[i].getSurname() + ", " + students[i].getForename() + ", " + students[i].getExamScore() + ", " + students[i].getExamGrade() + "}, ";
         }
 
@@ -164,7 +170,7 @@ public class classOfStudents {
     //TEST METHOD - To set random scores as examples
     public void setRandomScores(){
         Random rand = new Random();
-        for (int i = 0; i < currentSize; i++) {
+        for (int i = 0; i < currentSize + 1; i++) {
             students[i].setExamScore(rand.nextInt(80) + 20);
         }
     }

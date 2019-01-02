@@ -13,19 +13,34 @@ public class testStudent {
         return true;
     }
 
+    public static boolean checkIntValues(int data, int expected) {
+        if(data == expected) {
+            return false;
+        } else {
+            errorTrigger = true;
+            System.out.println("expected: " + expected);
+            System.out.println("actual: " + data);
+            System.out.println(" ");
+        }
+        return true;
+    }
+
     // Main method to run tests.
     public static void main (String[] args) {
 
         classOfStudents schoolClass = new classOfStudents();
         schoolClass.setStudents(dataLists.getDataList1(35));
 
-        //Test get album and get artist
-        checkStringValues(schoolClass.getStudents()[1].getForename(),"Robert");
-        checkStringValues(schoolClass.getStudents()[1].getSurname(),"Lynn");
+        System.out.println(schoolClass.toString());
 
-        //Test get next via get album and get artist
-        checkStringValues(schoolClass.getStudents()[2].getForename(),"Daisy");
-        checkStringValues(schoolClass.getStudents()[2].getSurname(),"Flowers");
+        //Test get forename and surname
+        checkStringValues(schoolClass.getStudents()[0].getForename(),"Gerrie");
+        checkStringValues(schoolClass.getStudents()[0].getSurname(),"Bennett");
+        checkStringValues(schoolClass.getStudents()[1].getForename(),"Rodger");
+        checkStringValues(schoolClass.getStudents()[1].getSurname(),"Smith");
+
+
+
 
         //TODO: Update methods for array
         //using set head method
