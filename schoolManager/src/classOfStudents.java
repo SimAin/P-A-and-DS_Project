@@ -91,7 +91,6 @@ public class classOfStudents {
     //Search key:
     // 0 == Full name
     // 1 == Surname
-    // 2 == Forename
     public int binarySearch (int search, String toFind) {
         student[] current = sortStudentsBySurname();
 
@@ -108,8 +107,6 @@ public class classOfStudents {
                 name = current[index].getSurname() + current[index].getForename();
             } else if (search == 1) {
                 name = current[index].getSurname();
-            } else if (search == 2) {
-                name = current[index].getForename();
             }
 
             // If found, return index of array

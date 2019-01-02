@@ -27,7 +27,7 @@ public class schoolManager {
                 printing(currentClass);
 
             } else if(input.equals("search") || input.equals("Search")) {
-                System.out.println("To search a full name type 'full', to search a surname, type 'surname', to search a forename, type 'forename': ");
+                System.out.println("To search a full name type 'full', to search a surname, type 'surname': ");
                 String searchType = (br.readLine());
                 searchOptionsManager(searchType, currentClass);
 
@@ -120,11 +120,6 @@ public class schoolManager {
             System.out.println("Please type the Surname of the student you wish to search for: ");
             String student_name = (br.readLine());
             int result = theClass.binarySearch(1, student_name);
-            searchResults(result, student_name, theClass);
-        } else if(searchType.equals("forename") || searchType.equals("Forename")) {
-            System.out.println("Please type the Forename of the student you wish to search for: ");
-            String student_name = (br.readLine());
-            int result = theClass.binarySearch(2, student_name);
             searchResults(result, student_name, theClass);
         } else {
             System.out.println("Error please try again: ");

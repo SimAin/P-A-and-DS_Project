@@ -37,10 +37,9 @@ public class scoreToGrade<T> {
 
         scoreToGrade current = this;
         scoreToGrade reset = this;
-        for (int i = 0; i < schoolClass.getCurrentSize() ; i++) {
+        for (int i = 0; i < schoolClass.getCurrentSize() + 1; i++) {
 
             boolean done = false;
-
             while (!done) {
                 //If either of the child nodes are null, it must be that grade so set.
                 //OR
@@ -55,11 +54,7 @@ public class scoreToGrade<T> {
                     current = current.getRightChild();
                 }
             }
-
-
-
         }
-
     }
 
     //Returns left child of grade
