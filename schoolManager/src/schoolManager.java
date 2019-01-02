@@ -6,52 +6,63 @@ public class schoolManager {
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static scoreToGrade<Integer> gradeNode = scoreToGrade.setGrades(95,85,75,65,45,20);
 
+    // --- *** ---
+    //Main method to run system
+    // --- *** ---
     public static void main (String[] args) throws IOException {
 
         boolean exit = false;
-
-
         student[] studentList;
         studentList = dataLists.getDataList1(35);
-        classOfStudents y7c2 = new classOfStudents( new staffMember("Mrs Simpson", "", "Year7 Teacher", null), 35, 24);
-        y7c2.setStudents(studentList);
+        classOfStudents currentClass = new classOfStudents( new staffMember("Mrs Simpson", "", "Year7 Teacher", null), 35, 23);
+        currentClass.setStudents(studentList);
 
         while (!exit) {
             menuText();
             String input = (br.readLine());
 
             if(input.equals("sort") || input.equals("sort")) {
-                y7c2.sortStudentsBySurname();
-                printing(y7c2);
+                currentClass.sortStudentsBySurname();
+                printing(currentClass);
 
             } else if(input.equals("search") || input.equals("Search")) {
-                System.out.println("To search a full name type 'full', to search a surname, type 'surname', to search a forename, type 'forename': ");
+                System.out.println("To search a full name type 'full', to search a surname, type 'surname': ");
                 String searchType = (br.readLine());
-                searchOptionsManager(searchType, y7c2);
+                searchOptionsManager(searchType, currentClass);
 
             } else if(input.equals("view") || input.equals("View")) {
-                printing(y7c2);
+                printing(currentClass);
 
             } else if(input.equals("score") || input.equals("Score")) {
-                y7c2.setScores(br);
+                currentClass.setScores(br);
 
             } else if(input.equals("grade") || input.equals("Grade")) {
-                gradeOptionsManager(y7c2);
+                gradeOptionsManager(currentClass);
 
             } else if(input.equals("random") || input.equals("Random")) {
-                y7c2.setRandomScores();
+                currentClass.setRandomScores();
 
-                System.out.println(y7c2.toString());
+                System.out.println(currentClass.toString());
             } else if(input.equals("details") || input.equals("Details")) {
-                System.out.println("Class size:  " + y7c2.getCurrentSize());
-                System.out.println("Scores average:  " + y7c2.getClassScoreAverage());
+                System.out.println("Class size:  " + currentClass.getCurrentSize());
+                System.out.println("Scores average:  " + currentClass.getClassScoreAverage());
 
             } else if(input.equals("add") || input.equals("Add")) {
                 System.out.println("Please type new students first name:");
                 String new_student_f = (br.readLine());
                 System.out.println("Please type new students last name:");
                 String new_student_s = (br.readLine());
-                y7c2.addStudent(new_student_f,new_student_s );
+                currentClass.addStudent(new_student_f,new_student_s );
+
+            } else if(input.equals("delete") || input.equals("Delete")) {
+                System.out.println("Firstly please search for the student to delete: ");
+                int index = searchOptionsManager("full", currentClass);
+                if(index == -1){
+                    System.out.println("Student not found, please try again.");
+                } else {
+                    currentClass.deleteStudent(index);
+                    System.out.println("Student successfully deleted.");
+                }
 
             } else if(input.equals("exit")){
                 exit = true;
@@ -106,27 +117,24 @@ public class schoolManager {
     }
 
     //Function to manage the options for searching for a student
-    private static void searchOptionsManager(String searchType, classOfStudents theClass) throws IOException {
+    private static int searchOptionsManager(String searchType, classOfStudents theClass) throws IOException {
+        int result = -1;
         if(searchType.equals("full") || searchType.equals("Full")) {
             System.out.println("Please type the Surname of the student you wish to search for: ");
             String student_sname = (br.readLine());
             System.out.println("Please type the Forename of the student you wish to search for: ");
             String student_fname = (br.readLine());
-            int result = theClass.binarySearch(0, student_sname + student_fname);
+            result = theClass.binarySearch(0, student_sname + student_fname);
             searchResults(result, student_sname + ", " + student_fname, theClass);
         } else if(searchType.equals("surname") || searchType.equals("Surname")) {
             System.out.println("Please type the Surname of the student you wish to search for: ");
             String student_name = (br.readLine());
-            int result = theClass.binarySearch(1, student_name);
-            searchResults(result, student_name, theClass);
-        } else if(searchType.equals("forename") || searchType.equals("Forename")) {
-            System.out.println("Please type the Forename of the student you wish to search for: ");
-            String student_name = (br.readLine());
-            int result = theClass.binarySearch(2, student_name);
+            result = theClass.binarySearch(1, student_name);
             searchResults(result, student_name, theClass);
         } else {
             System.out.println("Error please try again: ");
         }
+        return result;
     }
 
     //Function for managing output based on search results
