@@ -31,7 +31,7 @@ public class testStudent {
 
         student[] studentList;
         studentList = dataLists.getDataList1(35);
-        classOfStudents schoolClass = new classOfStudents( new staffMember("Mrs Simpson", "", "Year7 Teacher", null), 35, 23);
+        classOfStudents schoolClass = new classOfStudents( 35, 23);
         schoolClass.setStudents(studentList);
 
         //Test get forename and surname

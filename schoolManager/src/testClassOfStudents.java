@@ -41,7 +41,7 @@ public class testClassOfStudents {
     public static void main (String[] args) {
         student[] studentList;
         studentList = dataLists.getDataList1(35);
-        classOfStudents new_class = new classOfStudents( new staffMember("Mrs Simpson", "", "Year7 Teacher", null), 35, 23);
+        classOfStudents new_class = new classOfStudents( 35, 23);
 
         //Test set array of students
         new_class.setStudents(studentList);

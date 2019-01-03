@@ -14,7 +14,7 @@ public class schoolManager {
         boolean exit = false;
         student[] studentList;
         studentList = dataLists.getDataList1(35);
-        classOfStudents currentClass = new classOfStudents( new staffMember("Mrs Simpson", "", "Year7 Teacher", null), 35, 23);
+        classOfStudents currentClass = new classOfStudents( 35, 23);
         currentClass.setStudents(studentList);
 
         while (!exit) {
