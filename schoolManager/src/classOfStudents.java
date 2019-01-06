@@ -15,11 +15,6 @@ public class classOfStudents {
         this.currentSize = currentSize;
     }
 
-    //Constructor class for empty class of students
-    public classOfStudents() {
-        this.students = null;
-    }
-
     //Returns array of students
     public student[] getStudents() {
         return students;
@@ -51,8 +46,11 @@ public class classOfStudents {
 
     }
 
-    //TODO:
-    public void updateStudent(int index) {    }
+    //Update student in class
+    public void updateStudent(int index, String forename, String surname) {
+        students[index].setForename(forename);
+        students[index].setSurname(surname);
+    }
 
     //Incision sort algorithm for students by students surname
     public student[] sortStudentsBySurname () {

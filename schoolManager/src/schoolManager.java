@@ -64,6 +64,21 @@ public class schoolManager {
                     System.out.println("Student successfully deleted.");
                 }
 
+            } else if(input.equals("update") || input.equals("Update")) {
+                System.out.println("Firstly please search for the student to update: ");
+                int index = searchOptionsManager("full", currentClass);
+                if(index == -1){
+                    System.out.println("Student not found, please try again.");
+                } else {
+                    currentClass.deleteStudent(index);
+                    System.out.println("Student successfully found please type the updated forename " +
+                            "(If you only wish to update the Surname, please retype the students forename).");
+                    String new_student_f = (br.readLine());
+                    System.out.println("Now please type the updated surname ");
+                    String new_student_s = (br.readLine());
+                    currentClass.updateStudent(index, new_student_f, new_student_s);
+                }
+
             } else if(input.equals("exit")){
                 exit = true;
 
