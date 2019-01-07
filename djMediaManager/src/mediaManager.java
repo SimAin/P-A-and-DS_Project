@@ -49,8 +49,11 @@ public class mediaManager {
                 System.out.println("Please type new album name:");
                 String new_album_name = (br.readLine());
 
-                album new_album = new album(null, new_artist, new_album_name );
+                album new_album = new album(null, new_artist, new_album_name);
                 head.getHead().join(new_album);
+
+            } else if(input.equals("delete") || input.equals("Delete")) {
+                //TODO:
 
             } else if(input.equals("exit")){
 

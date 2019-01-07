@@ -25,18 +25,6 @@ public class testClassOfStudents {
         return true;
     }
 
-    public static boolean checkBooleanValues(Boolean data) {
-        if(data ) {
-            return false;
-        } else {
-            errorTrigger = true;
-            System.out.println("expected: True" );
-            System.out.println("actual: False" );
-
-        }
-        return true;
-    }
-
     // Main method to run tests.
     public static void main (String[] args) {
         student[] studentList;
