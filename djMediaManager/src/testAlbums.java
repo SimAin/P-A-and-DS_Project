@@ -107,6 +107,10 @@ public class testAlbums {
         checkBooleanValues(!head.contains("", true));
         checkBooleanValues(!head.contains("123", false));
 
+        //Test album delete
+        head.delete("Purple Rain");
+        checkBooleanValues(head.contains("Purple Rain", true));
+
         if(!errorTrigger){
             System.out.println("Tests complete: All tests passed, No errors found");
         }

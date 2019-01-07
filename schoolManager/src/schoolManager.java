@@ -99,7 +99,7 @@ public class schoolManager {
         System.out.println("To search for a student type 'search':");
         System.out.println("To manage grades, set grades or change boundaries (initially set to default) please type 'grade':");
         System.out.println("To get class size and score average please type 'details':");
-        System.out.println("To add a new student please type 'add' and to delete a student please type 'delete'"); //TODO: add delete
+        System.out.println("To add a new student please type 'add' and to delete a student please type 'delete'");
         System.out.println("Please type 'exit' to end:");
     }
 
