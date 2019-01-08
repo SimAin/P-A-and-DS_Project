@@ -14,7 +14,7 @@ public class schoolManager {
         boolean exit = false;
         student[] studentList;
         studentList = dataLists.getDataList1(35);
-        classOfStudents currentClass = new classOfStudents( new staffMember("Mrs Simpson", "", "Year7 Teacher", null), 35, 23);
+        classOfStudents currentClass = new classOfStudents( 35, 23);
         currentClass.setStudents(studentList);
 
         while (!exit) {
@@ -64,6 +64,21 @@ public class schoolManager {
                     System.out.println("Student successfully deleted.");
                 }
 
+            } else if(input.equals("update") || input.equals("Update")) {
+                System.out.println("Firstly please search for the student to update: ");
+                int index = searchOptionsManager("full", currentClass);
+                if(index == -1){
+                    System.out.println("Student not found, please try again.");
+                } else {
+                    currentClass.deleteStudent(index);
+                    System.out.println("Student successfully found please type the updated forename " +
+                            "(If you only wish to update the Surname, please retype the students forename).");
+                    String new_student_f = (br.readLine());
+                    System.out.println("Now please type the updated surname ");
+                    String new_student_s = (br.readLine());
+                    currentClass.updateStudent(index, new_student_f, new_student_s);
+                }
+
             } else if(input.equals("exit")){
                 exit = true;
 
@@ -84,7 +99,7 @@ public class schoolManager {
         System.out.println("To search for a student type 'search':");
         System.out.println("To manage grades, set grades or change boundaries (initially set to default) please type 'grade':");
         System.out.println("To get class size and score average please type 'details':");
-        System.out.println("To add a new student please type 'add' and to delete a student please type 'delete'"); //TODO: add delete
+        System.out.println("To add a new student please type 'add' and to delete a student please type 'delete'");
         System.out.println("Please type 'exit' to end:");
     }
 

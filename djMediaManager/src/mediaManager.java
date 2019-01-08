@@ -16,15 +16,16 @@ public class mediaManager {
         albums head = new albums();
         head.setHead(album);
         System.out.println(head.toString());
-
+        System.out.println();
+        System.out.println("The albums listed above have been imported");
         while (!exit) {
             System.out.println();
-            System.out.println("The albums listed above have been imported");
+            System.out.println("Please view collection please type 'view':");
             System.out.println("Please type 'album' to sort them by album or 'artist' to sort by artist:");
             System.out.println("To search please type 'search':");
             System.out.println("To count artists and albums please type 'count':");
             System.out.println("To add a new album please type 'add'");
-            System.out.println("To delete an album please type 'delete'"); //TODO: add delete
+            System.out.println("To delete an album please type 'delete'");
             System.out.println("Please type 'exit' to end:");
             String input = (br.readLine());
 
@@ -35,6 +36,9 @@ public class mediaManager {
             } else if(input.equals("artist") || input.equals("Artist")) {
                 head.artistBubbleSort();
                 printing(head);
+
+            }else if(input.equals("view") || input.equals("View")) {
+                    printing(head);
 
             } else if(input.equals("search") || input.equals("Search")) {
                 searching(head);
@@ -49,8 +53,13 @@ public class mediaManager {
                 System.out.println("Please type new album name:");
                 String new_album_name = (br.readLine());
 
-                album new_album = new album(null, new_artist, new_album_name );
+                album new_album = new album(null, new_artist, new_album_name);
                 head.getHead().join(new_album);
+
+            } else if(input.equals("delete") || input.equals("Delete")) {
+                System.out.println("Please type album to delete:");
+                String album_to_delete = (br.readLine());
+                head.delete(album_to_delete);
 
             } else if(input.equals("exit")){
 

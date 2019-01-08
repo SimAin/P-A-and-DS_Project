@@ -32,9 +32,9 @@ public class student {
         return surname;
     }
 
-    //Set exam score of student
-    public void setExamScore(int examScore) {
-        this.examScore = examScore;
+    //Set surname of student
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     //Get exam score of student
@@ -42,9 +42,9 @@ public class student {
         return examScore;
     }
 
-    //Set surname of student
-    public void setSurname(String surname) {
-        this.surname = surname;
+    //Set exam score of student
+    public void setExamScore(int examScore) {
+        this.examScore = examScore;
     }
 
     //Get exam grade of student

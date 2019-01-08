@@ -226,4 +226,25 @@ public class albums {
         current.head = resetHead(current.head);
         return false;
     }
+
+    //Deletes album from list
+    public void delete (String AlbumToDelete) {
+        boolean found = false;
+        if(!contains(AlbumToDelete, true)){
+            System.out.println("Album not found please try again.");
+        } else {
+
+            do{
+                head = head.getNext();
+                if(head.getAlbumName().equals(AlbumToDelete)){
+                    found = true;
+                }
+            }
+            while (!found);
+            head.getNext().setPrevious(head.getPrevious());
+            head.getPrevious().setNext(head.getNext());
+            resetHead(head);
+            System.out.println("Album " + AlbumToDelete + " successfully deleted.");
+        }
+    }
 }

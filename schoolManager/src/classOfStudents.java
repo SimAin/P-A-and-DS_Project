@@ -3,25 +3,16 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 public class classOfStudents {
-    private staffMember teacher;
 
     private student[] students;
     private int currentSize;
     private int maximumSize;
 
     //Constructor class for class of students
-    public classOfStudents( staffMember teacher, int maximumSize, int currentSize) {
+    public classOfStudents(int maximumSize, int currentSize) {
         this.students = new student[maximumSize];
         this.maximumSize = maximumSize;
         this.currentSize = currentSize;
-
-        this.teacher = teacher;
-    }
-
-    //Constructor class for empty class of students
-    public classOfStudents() {
-        this.students = null;
-        this.teacher = null;
     }
 
     //Returns array of students
@@ -32,14 +23,6 @@ public class classOfStudents {
     //Sets array of students
     public void setStudents(student[] students) {
         this.students = students;
-    }
-
-    public staffMember getTeacher() {
-        return teacher;
-    }
-
-    public void setTeacher(staffMember teacher) {
-        this.teacher = teacher;
     }
 
     //Adds Student to class
@@ -61,6 +44,12 @@ public class classOfStudents {
         students[currentSize].set(new student("", ""));
         currentSize = currentSize-1;
 
+    }
+
+    //Update student in class
+    public void updateStudent(int index, String forename, String surname) {
+        students[index].setForename(forename);
+        students[index].setSurname(surname);
     }
 
     //Incision sort algorithm for students by students surname
